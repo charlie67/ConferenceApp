@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Conference App</string>
+    <string name="timetable_tab">Timetable</string>
+    <string name="favourites_tab">Favourites</string>
+    <string name="speakers_tab">Speakers</string>
+
+
+    <string name="hello_blank_fragment">Hello Blank Fragment</string>
 </resources>
