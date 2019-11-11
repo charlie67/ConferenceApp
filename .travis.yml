@@ -1,0 +1,17 @@
+language: android
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-29.0.2
+  - android-28
+  - sys-img-x86-android-28
+  licences:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+before_script:
+  - mkdir -p "$ANDROID_HOME/licenses"
+before_install:
+  - yes | sdkmanager "platforms;android-28"
+script: "./ConferenceApp/build.sh"
