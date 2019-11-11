@@ -17,6 +17,7 @@ before_script:
 before_install:
   - yes | sdkmanager "platforms;android-28"
   - touch $HOME/.android/repositories.cfg
+  - echo y | sdkmanager tools
   - echo y | sdkmanager "system-images;android-28;default;x86"
   - echo no | avdmanager create avd --force -n emulatorApi24 -k "system-images;android-28;default;x86"
   - emulator -avd test -no-audio -no-window &
