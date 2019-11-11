@@ -14,4 +14,3 @@ before_script:
   - mkdir -p "$ANDROID_HOME/licenses"
 before_install:
   - yes | sdkmanager "platforms;android-28"
-script: "./build.sh"
