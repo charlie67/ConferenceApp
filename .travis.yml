@@ -12,15 +12,30 @@ android:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
+addons:
+  apt:
+    packages:
+      - bridge-utils
+      - libpulse0
+      - libvirt-bin
+      - qemu-kvm
+      - virtinst
+      - ubuntu-vm-builder
 before_script:
   - mkdir -p "$ANDROID_HOME/licenses"
 before_install:
+  # Set up KVM
+  - sudo adduser $USER libvirt
+  - sudo adduser $USER kvm
+
   - yes | sdkmanager "platforms;android-28"
-  - touch $HOME/.android/repositories.cfg
+
+  # Avoid harmless sdkmanager warning
+  - echo 'count=0' > ~/.android/repositories.cfg
   - echo y | sdkmanager tools
   - echo y | sdkmanager "system-images;android-28;google_apis;x86"
   - echo no | avdmanager create avd --force -n emulatorApi24 -k "system-images;android-28;google_apis;x86" -n test
-  - emulator -avd test -no-audio -no-window &
+  - emulator-headless -avd test -no-audio -no-window &
   - adb shell input keyevent 82 &
 script:
   - ./gradlew build connectedCheck
