@@ -19,7 +19,7 @@ before_install:
   - touch $HOME/.android/repositories.cfg
   - echo y | sdkmanager tools
   - echo y | sdkmanager "system-images;android-28;default;x86"
-  - echo no | avdmanager create avd --force -n emulatorApi24 -k "system-images;android-28;default;x86"
+  - echo no | avdmanager create avd --force -n emulatorApi24 -k "system-images;android-28;default;x86" -n test
   - emulator -avd test -no-audio -no-window &
   - adb shell input keyevent 82 &
 script:
