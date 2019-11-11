@@ -1,4 +1,6 @@
-## from https://github.com/hannesa2/DbPreferences/blob/77e5278b27aa2dd6759b9145732d01f978b41638/.travis.yml
+# from https://github.com/hannesa2/DbPreferences/blob/77e5278b27aa2dd6759b9145732d01f978b41638/.travis.yml
+# licensed under apache v2
+
 sudo: true
 language: generic
 dist: bionic
@@ -100,7 +102,7 @@ script:
   - set -o pipefail
   - ./gradlew clean build :DBPrefs:javadocJar :DBPrefs-lint:test :DBPrefs:assembleDebugAndroidTest :DBPrefs:check --profile --stacktrace --continue 2>&1 | tee build.log
   - set +o pipefail
-  - ./gradlew connectedUseOldLibDebugAndroidTest
+  - ./gradlew build connectedCheck
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
