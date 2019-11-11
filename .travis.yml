@@ -5,9 +5,6 @@ android:
     - platform-tools
     - build-tools-29.0.2
     - android-28
-    - sys-img-x86-android-28
-    - sys-img-armeabi-v7a-google_apis-28
-    - sys-img-armeabi-v7a-addon-google_apis-google-28
   licences:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
@@ -17,7 +14,6 @@ before_script:
 before_install:
   - yes | sdkmanager "platforms;android-28"
   - touch $HOME/.android/repositories.cfg
-  - sdkmanager tools
   - sdkmanager "system-images;android-28;default;x86"
   - echo no | avdmanager create avd --force -n emulatorApi24 -k "system-images;android-28;default;x86"
   - emulator -avd test -no-audio -no-window &
