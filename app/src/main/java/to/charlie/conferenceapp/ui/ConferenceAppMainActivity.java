@@ -1,22 +1,23 @@
 package to.charlie.conferenceapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.ui.favourites.FavouritesFragment;
@@ -51,27 +52,53 @@ public class ConferenceAppMainActivity extends AppCompatActivity implements Navi
 		// Handle navigation drawer option selections
 		navigationView.setNavigationItemSelectedListener(this);
 
-		SectionsPagerAdapter pagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-		ViewPager pager = findViewById(R.id.pager);
-		pager.setAdapter(pagerAdapter);
-
-		TabLayout tabLayout = findViewById(R.id.tabs);
-		tabLayout.setupWithViewPager(pager);
-
-		pager.addOnPageChangeListener(addPageChangeListener());
+		displayView(R.id.nav_timetable);
 	}
 
 	/**
 	 * Called when an item in the navigation drawer is selected
 	 *
 	 * @param item The item that was selected
-	 * @return true if te item was handled
+	 * @return true if the item was handled
 	 */
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item)
 	{
+		int viewId = item.getItemId();
+		return displayView(viewId);
+	}
 
-		Toast.makeText(this, "Item id: " + item.getItemId(), Toast.LENGTH_LONG).show();
+	private boolean displayView(int viewId)
+	{
+		Fragment fragment = null;
+
+		switch (viewId)
+		{
+			case R.id.nav_timetable:
+				fragment = new TimetableFragment();
+				break;
+
+			case R.id.nav_favourites:
+				fragment = new FavouritesFragment();
+				break;
+
+			case R.id.nav_speakers:
+				fragment = new SpeakersFragment();
+				break;
+		}
+
+		if (fragment == null)
+		{
+			Log.e("Nav error", "nav item id was not in switch statement");
+			return false;
+		}
+
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.content_frame, fragment);
+		ft.commit();
+
+		DrawerLayout drawer = findViewById(R.id.drawer_layout);
+		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
 
@@ -120,7 +147,7 @@ public class ConferenceAppMainActivity extends AppCompatActivity implements Navi
 				case 2:
 					return new SpeakersFragment();
 			}
-			return null;
+			return new TimetableFragment();
 		}
 
 		@Override

@@ -21,23 +21,16 @@
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar_main" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabMaxWidth="0dp" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
