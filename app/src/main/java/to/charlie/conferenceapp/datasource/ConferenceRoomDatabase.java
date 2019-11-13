@@ -10,14 +10,23 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import to.charlie.conferenceapp.datasource.util.AssetSQLiteOpenHelperFactory;
 import to.charlie.conferenceapp.model.Location;
+import to.charlie.conferenceapp.model.LocationDao;
 import to.charlie.conferenceapp.model.Session;
+import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.model.Speaker;
+import to.charlie.conferenceapp.model.SpeakerDao;
 
 @Database(entities = {Location.class, Session.class, Speaker.class}, version = 1)
 public abstract class ConferenceRoomDatabase extends RoomDatabase
 {
 	private static ConferenceRoomDatabase INSTANCE;
 	private static final String DB_NAME = "conf.db";
+
+	public abstract LocationDao getLocationDao();
+
+	public abstract SessionDao getSessionDao();
+
+	public abstract SpeakerDao getSpeakerDao();
 
 	public static ConferenceRoomDatabase getDatabase(final Context context)
 	{
