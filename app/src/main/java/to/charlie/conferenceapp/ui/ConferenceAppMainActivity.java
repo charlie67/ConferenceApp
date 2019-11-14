@@ -20,7 +20,8 @@ import to.charlie.conferenceapp.ui.speakers.SpeakersFragment;
 
 public class ConferenceAppMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-	private Toolbar toolbar;
+	private int displayedViewId;
+	private final static String VIEW_ID_KEY = "view_id_key";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -28,14 +29,29 @@ public class ConferenceAppMainActivity extends AppCompatActivity implements Navi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conference_app_main);
 
-		toolbar = findViewById(R.id.toolbar);
+		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(this::onNavigationItemSelected);
 
-		displayView(R.id.nav_timetable);
+		int viewToDisplay = R.id.nav_timetable;
+
+		if (savedInstanceState != null)
+		{
+			viewToDisplay = savedInstanceState.getInt(VIEW_ID_KEY);
+		}
+		displayView(viewToDisplay);
 	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+
+		outState.putInt(VIEW_ID_KEY, displayedViewId);
+	}
+
 
 	/**
 	 * Called when an item in the navigation drawer is selected
@@ -74,6 +90,7 @@ public class ConferenceAppMainActivity extends AppCompatActivity implements Navi
 			Log.e("Nav error", "nav item id was not in switch statement");
 			return false;
 		}
+		displayedViewId = viewId;
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.content_frame, fragment);
