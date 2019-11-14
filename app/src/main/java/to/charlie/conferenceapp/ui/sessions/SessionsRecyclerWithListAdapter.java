@@ -9,7 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.Session;
@@ -95,12 +98,20 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	 */
 	class ViewHolder extends RecyclerView.ViewHolder
 	{
+		TextView sessionDay;
+		TextView sessionTime;
 		TextView sessionTitle;
+		TextView sessionSpeaker;
+
+		Locale currentLocale;
 
 		ViewHolder(@NonNull View itemView)
 		{
 			super(itemView);
-			this.sessionTitle = itemView.findViewById(R.id.sessionTitleTextView);
+			currentLocale = itemView.getResources().getConfiguration().getLocales().get(0);
+			this.sessionDay = itemView.findViewById(R.id.session_day_text_view);
+			this.sessionTime = itemView.findViewById(R.id.session_time_text_view);
+			this.sessionTitle = itemView.findViewById(R.id.session_title_text_view);
 		}
 
 		/**
@@ -110,6 +121,10 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		 */
 		void bindDataSet(Session session)
 		{
+
+			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
+			sessionDay.setText(dayOfWeek);
+			sessionTime.setText(session.getTimeStart());
 			sessionTitle.setText(session.getTitle());
 		}
 	}
