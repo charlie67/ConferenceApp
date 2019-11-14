@@ -23,7 +23,7 @@ public class Session
 
 	private String sessionDate;
 
-	private String sessionOrder;
+	private int sessionOrder;
 
 	private String timeStart;
 
@@ -83,12 +83,12 @@ public class Session
 		this.sessionDate = sessionDate;
 	}
 
-	public String getSessionOrder()
+	public int getSessionOrder()
 	{
 		return sessionOrder;
 	}
 
-	public void setSessionOrder(String sessionOrder)
+	public void setSessionOrder(int sessionOrder)
 	{
 		this.sessionOrder = sessionOrder;
 	}

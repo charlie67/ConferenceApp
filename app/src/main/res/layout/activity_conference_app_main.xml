@@ -23,6 +23,17 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/primaryColor"
+            app:itemIconTint="@color/bottom_navigation_item"
+            app:itemTextColor="@color/bottom_navigation_item"
+            app:menu="@menu/bottom_navigation_menu" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
@@ -37,9 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
         app:itemTextColor="?android:textColorPrimary"
-        app:itemIconTint="?colorPrimaryDark"
-        app:menu="@menu/menu_nav" />
+        app:itemIconTint="?colorPrimaryDark" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

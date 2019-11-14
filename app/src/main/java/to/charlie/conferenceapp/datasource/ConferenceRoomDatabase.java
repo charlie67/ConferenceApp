@@ -1,6 +1,7 @@
 package to.charlie.conferenceapp.datasource;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -16,7 +17,7 @@ import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.model.Speaker;
 import to.charlie.conferenceapp.model.SpeakerDao;
 
-@Database(entities = {Location.class, Session.class, Speaker.class}, version = 1)
+@Database(entities = {Location.class, Session.class, Speaker.class}, version = 2)
 public abstract class ConferenceRoomDatabase extends RoomDatabase
 {
 	private static ConferenceRoomDatabase INSTANCE;
@@ -36,6 +37,7 @@ public abstract class ConferenceRoomDatabase extends RoomDatabase
 			{
 				if (INSTANCE == null)
 				{
+					Log.i("Database", "Creating the database");
 					INSTANCE = createDatabase(context);
 				}
 			}
