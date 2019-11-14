@@ -12,6 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginEnd="0dp" />
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -32,17 +40,11 @@
             android:background="@color/primaryColor"
             app:itemIconTint="@color/bottom_navigation_item"
             app:itemTextColor="@color/bottom_navigation_item"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/bottom_navigation_menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
