@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="24" viewBox="0 0 360 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="360" height="24" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="System_Bar_Primary" data-name="System Bar / Primary" clip-path="url(#clip-path)">
+    <rect id="Rectangle_373" data-name="Rectangle 373" width="360" height="24" fill="#7e39fb"/>
+    <path id="Icons" d="M23-10a5,5,0,0,1,5,5,5,5,0,0,1-5,5,5,5,0,0,1-5-5A5,5,0,0,1,23-10ZM40,0,34-10H46ZM0-10H10V0H0Z" transform="translate(307 17)" fill="#e3b8ff" fill-rule="evenodd"/>
+  </g>
+</svg>

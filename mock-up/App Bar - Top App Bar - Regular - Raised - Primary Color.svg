@@ -1,0 +1,13 @@
+<svg id="App_Bar_Top_App_Bar_Regular_Raised_Primary_Color" data-name="App Bar / Top App Bar / Regular / Raised / Primary Color" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="56" viewBox="0 0 360 56">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="24" height="24" fill="none"/>
+    </clipPath>
+  </defs>
+  <path id="Surface" d="M75-1383H435v-56H75Z" transform="translate(-75 1439)" fill="#6200ee"/>
+  <g id="Icon_Search_Filled" data-name="Icon / Search / Filled" transform="translate(320 16)" clip-path="url(#clip-path)">
+    <rect id="Box" width="24" height="24" fill="none"/>
+    <path id="Icon_Search" data-name="Icon / Search" d="M415.5-1404h-.794l-.276-.274A6.469,6.469,0,0,0,416-1408.5a6.5,6.5,0,0,0-6.5-6.5,6.5,6.5,0,0,0-6.5,6.5,6.5,6.5,0,0,0,6.5,6.5,6.47,6.47,0,0,0,4.225-1.566l.276.274v.792l5,4.991L420.49-1399l-4.988-5Zm-6,0a4.5,4.5,0,0,1-4.5-4.5,4.5,4.5,0,0,1,4.5-4.5,4.5,4.5,0,0,1,4.5,4.5,4.5,4.5,0,0,1-4.5,4.5Z" transform="translate(-400 1418)" fill="#fff" fill-rule="evenodd"/>
+  </g>
+  <text id="Headline_6" data-name="Headline 6" transform="translate(14 32)" fill="#fff" font-size="20" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.013em"><tspan x="0" y="0">Headline 6</tspan></text>
+</svg>

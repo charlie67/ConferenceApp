@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="372" height="60" viewBox="0 0 372 60">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="372" height="60" fill="none"/>
+    </clipPath>
+    <filter id="Surface" x="0" y="0" width="372" height="60" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path-2">
+      <rect width="120" height="48" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Tab_Fixed_Tabs_Text_Labels_Only_Raised" data-name="Tab / Fixed Tabs / Text Labels Only / Raised" clip-path="url(#clip-path)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Surface)">
+      <rect id="Surface-2" data-name="Surface" width="360" height="48" transform="translate(6 2)" fill="#6200ee"/>
+    </g>
+    <g id="Tab_Elements_Text_Tab_Active_Enabled" data-name="Tab / Elements / Text Tab / Active / Enabled" transform="translate(6 2)" clip-path="url(#clip-path-2)">
+      <rect id="Box" width="120" height="48" fill="none"/>
+      <rect id="Selected" width="120" height="2" transform="translate(0 46)" fill="#fff"/>
+      <text id="BUTTON" transform="translate(29 15)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.089em"><tspan x="0.644" y="15">BUTTON</tspan></text>
+    </g>
+    <g id="Tab_Elements_Text_Tab_Inactive_Enabled" data-name="Tab / Elements / Text Tab / Inactive / Enabled" transform="translate(126 2)" clip-path="url(#clip-path-2)">
+      <rect id="Box-2" data-name="Box" width="120" height="48" fill="none"/>
+      <text id="BUTTON-2" data-name="BUTTON" transform="translate(29 15)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.089em" opacity="0.6"><tspan x="0.644" y="15">BUTTON</tspan></text>
+    </g>
+    <g id="Tab_Elements_Text_Tab_Inactive_Enabled-2" data-name="Tab / Elements / Text Tab / Inactive / Enabled" transform="translate(246 2)" clip-path="url(#clip-path-2)">
+      <rect id="Box-3" data-name="Box" width="120" height="48" fill="none"/>
+      <text id="BUTTON-3" data-name="BUTTON" transform="translate(29 15)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.089em" opacity="0.6"><tspan x="0.644" y="15">BUTTON</tspan></text>
+    </g>
+  </g>
+</svg>

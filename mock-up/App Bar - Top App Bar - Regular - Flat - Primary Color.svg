@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="56" viewBox="0 0 360 56">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="360" height="56" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect width="24" height="24" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="App_Bar_Top_App_Bar_Regular_Flat_Primary_Color" data-name="App Bar / Top App Bar / Regular / Flat / Primary Color" clip-path="url(#clip-path)">
+    <path id="Surface" d="M75-1383H435v-56H75Z" transform="translate(-75 1439)" fill="#6200ee"/>
+    <g id="Icon_Menu_Filled" data-name="Icon / Menu / Filled" transform="translate(16 16)" clip-path="url(#clip-path-2)">
+      <rect id="Box" width="24" height="24" fill="none"/>
+      <path id="Icon_Menu" data-name="Icon / Menu" d="M99-1400h18v-2H99Zm0-5h18v-2H99Zm0-7v2h18v-2Z" transform="translate(-96 1418)" fill="#fff"/>
+    </g>
+    <g id="Icon_Search_Filled" data-name="Icon / Search / Filled" transform="translate(320 16)" clip-path="url(#clip-path-2)">
+      <rect id="Box-2" data-name="Box" width="24" height="24" fill="none"/>
+      <path id="Icon_Search" data-name="Icon / Search" d="M415.5-1404h-.794l-.276-.274A6.469,6.469,0,0,0,416-1408.5a6.5,6.5,0,0,0-6.5-6.5,6.5,6.5,0,0,0-6.5,6.5,6.5,6.5,0,0,0,6.5,6.5,6.47,6.47,0,0,0,4.225-1.566l.276.274v.792l5,4.991L420.49-1399l-4.988-5Zm-6,0a4.5,4.5,0,0,1-4.5-4.5,4.5,4.5,0,0,1,4.5-4.5,4.5,4.5,0,0,1,4.5,4.5,4.5,4.5,0,0,1-4.5,4.5Z" transform="translate(-400 1418)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+    <g id="Icon_Favorite_Filled" data-name="Icon / Favorite / Filled" transform="translate(272 16)" clip-path="url(#clip-path-2)">
+      <rect id="Box-3" data-name="Box" width="24" height="24" fill="none"/>
+      <path id="Icon_Favorite" data-name="Icon / Favorite" d="M364-1396.65l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53a5.447,5.447,0,0,1,5.5-5.5,5.989,5.989,0,0,1,4.5,2.09,5.989,5.989,0,0,1,4.5-2.09,5.447,5.447,0,0,1,5.5,5.5c0,3.78-3.4,6.86-8.55,11.54Z" transform="translate(-352 1418)" fill="#fff"/>
+    </g>
+    <g id="Icon_Share_Filled" data-name="Icon / Share / Filled" transform="translate(224 16)" clip-path="url(#clip-path-2)">
+      <rect id="Box-4" data-name="Box" width="24" height="24" fill="none"/>
+      <path id="Icon_Share" data-name="Icon / Share" d="M322-1401.92a2.912,2.912,0,0,0-1.96.77l-7.13-4.15a3.274,3.274,0,0,0,.09-.7,3.274,3.274,0,0,0-.09-.7l7.05-4.11a2.987,2.987,0,0,0,2.04.81,3,3,0,0,0,3-3,3,3,0,0,0-3-3,3,3,0,0,0-3,3,3.274,3.274,0,0,0,.09.7l-7.05,4.11A2.987,2.987,0,0,0,310-1409a3,3,0,0,0-3,3,3,3,0,0,0,3,3,2.987,2.987,0,0,0,2.04-.81l7.12,4.16a2.821,2.821,0,0,0-.08.65,2.923,2.923,0,0,0,2.92,2.92,2.923,2.923,0,0,0,2.92-2.92A2.923,2.923,0,0,0,322-1401.92Z" transform="translate(-304 1418)" fill="#fff"/>
+    </g>
+    <text id="Headline_6" data-name="Headline 6" transform="translate(72 34)" fill="#fff" font-size="20" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="0.013em"><tspan x="0" y="0">Headline 6</tspan></text>
+  </g>
+</svg>
