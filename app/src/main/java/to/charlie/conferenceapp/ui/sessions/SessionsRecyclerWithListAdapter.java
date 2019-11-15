@@ -1,10 +1,13 @@
 package to.charlie.conferenceapp.ui.sessions;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +26,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	private List<Session> dataSet;
 	private View.OnClickListener clickListener;
 
-	public SessionsRecyclerWithListAdapter(Context context)
+	SessionsRecyclerWithListAdapter(Context context)
 	{
 		this.context = context;
 	}
@@ -80,6 +83,16 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	}
 
 	/**
+	 * Allows clicks events to be caught
+	 *
+	 * @param itemClickListener The provided listener invoked when someone clicks on an item in the grid
+	 */
+	void setOnClickListener(View.OnClickListener itemClickListener)
+	{
+		this.clickListener = itemClickListener;
+	}
+
+	/**
 	 * If the data set is reset, then we need to let the adapter know.
 	 *
 	 * @param dataSet The updated dataSet
@@ -101,17 +114,36 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		TextView sessionDay;
 		TextView sessionTime;
 		TextView sessionTitle;
-		TextView sessionSpeaker;
+
+		private String sessionId;
 
 		Locale currentLocale;
 
 		ViewHolder(@NonNull View itemView)
 		{
 			super(itemView);
-			currentLocale = itemView.getResources().getConfiguration().getLocales().get(0);
+			itemView.setOnClickListener(v -> Toast.makeText(itemView.getContext(), "Clicked session " + sessionId, Toast.LENGTH_SHORT).show());
+			Resources resources = itemView.getResources();
+
+			currentLocale = resources.getConfiguration().getLocales().get(0);
 			this.sessionDay = itemView.findViewById(R.id.session_day_text_view);
 			this.sessionTime = itemView.findViewById(R.id.session_time_text_view);
 			this.sessionTitle = itemView.findViewById(R.id.session_title_text_view);
+
+			int screenWidthDp = resources.getConfiguration().screenWidthDp;
+			//2 dp margin either side of the screen
+			int screenWidthDpNoMargin = screenWidthDp - 2 - 2;
+
+			int dateAreaDpWidth = (int) (screenWidthDpNoMargin * 0.25);
+			int titleAreaDpWidth = (int) (screenWidthDpNoMargin * 0.75);
+
+			int dateAreaPxWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dateAreaDpWidth, resources.getDisplayMetrics());
+
+			int titleAreaPxWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, titleAreaDpWidth, resources.getDisplayMetrics());
+
+			sessionDay.setWidth(dateAreaPxWidth);
+			sessionTime.setWidth(dateAreaPxWidth);
+			sessionTitle.setWidth(titleAreaPxWidth);
 		}
 
 		/**
@@ -121,7 +153,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		 */
 		void bindDataSet(Session session)
 		{
-
+			sessionId = session.getId();
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);
 			sessionTime.setText(session.getTimeStart());
