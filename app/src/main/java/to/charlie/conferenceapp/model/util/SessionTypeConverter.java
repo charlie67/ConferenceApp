@@ -15,6 +15,6 @@ public class SessionTypeConverter
 	@TypeConverter
 	public static SessionType toSessionType(String sessionType)
 	{
-		return sessionType == null ? null : SessionType.valueOf(sessionType);
+		return sessionType == null ? null : SessionType.valueOf(sessionType.toUpperCase());
 	}
 }
