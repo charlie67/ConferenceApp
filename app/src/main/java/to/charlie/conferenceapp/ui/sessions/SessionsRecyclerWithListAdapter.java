@@ -114,6 +114,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		TextView sessionDay;
 		TextView sessionTime;
 		TextView sessionTitle;
+		TextView sessionType;
 
 		private String sessionId;
 
@@ -129,7 +130,10 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			this.sessionDay = itemView.findViewById(R.id.session_day_text_view);
 			this.sessionTime = itemView.findViewById(R.id.session_time_text_view);
 			this.sessionTitle = itemView.findViewById(R.id.session_title_text_view);
+			this.sessionType = itemView.findViewById(R.id.session_type_text_view);
 
+			//this sets the correct width of the text views so that the day time section occupies a
+			// quarter of the width and the title occupies the remainder
 			int screenWidthDp = resources.getConfiguration().screenWidthDp;
 			//2 dp margin either side of the screen
 			int screenWidthDpNoMargin = screenWidthDp - 2 - 2;
@@ -158,6 +162,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			sessionDay.setText(dayOfWeek);
 			sessionTime.setText(session.getTimeStart());
 			sessionTitle.setText(session.getTitle());
+			sessionType.setText(session.getSessionType().getTypeName());
 		}
 	}
 }

@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/session_border"
     android:columnCount="2"
-    android:rowCount="2">
+    android:rowCount="3">
 
     <TextView
+        style="@style/SessionTextView"
         android:id="@+id/session_day_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:textColor="@color/primaryTextColor" />
+        android:layout_marginTop="2dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        style="@style/SessionTextView"
         android:id="@+id/session_time_text_view"
         android:layout_marginStart="2dp"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:textColor="@color/primaryTextColor" />
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/session_day_text_view"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        style="@style/SessionTextView"
         android:id="@+id/session_title_text_view"
         android:layout_marginEnd="2dp"
-        android:layout_row="0"
-        android:layout_rowSpan="2"
-        android:layout_column="1"
-        android:textColor="@color/primaryTextColor" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-</GridLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/session_day_text_view" />
+
+    <TextView
+        android:id="@+id/session_type_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/session_divider" />
+
+    <View
+        android:id="@+id/session_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="1dp"
+        android:background="#909090"
+
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
