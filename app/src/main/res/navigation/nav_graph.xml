@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/sessionsFragment">
+
+    <fragment
+        android:id="@+id/sessionsFragment"
+        android:name="to.charlie.conferenceapp.ui.sessions.SessionsFragment"
+        android:label="fragment_sessions"
+        tools:layout="@layout/fragment_sessions" />
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="to.charlie.conferenceapp.ui.favourites.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+    <fragment
+        android:id="@+id/speakersFragment"
+        android:name="to.charlie.conferenceapp.ui.speakers.SpeakersFragment"
+        android:label="fragment_speakers"
+        tools:layout="@layout/fragment_speakers" />
+</navigation>
