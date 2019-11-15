@@ -30,4 +30,9 @@ public class ConferenceRepository
 	{
 		return sessionDao.getAllSessions();
 	}
+
+	public LiveData<List<Session>> getAllFavouriteSessions()
+	{
+		return sessionDao.getAllFavouriteSessions();
+	}
 }
