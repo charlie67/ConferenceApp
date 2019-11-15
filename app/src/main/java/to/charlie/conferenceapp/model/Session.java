@@ -29,16 +29,19 @@ public class Session
 
 	private String timeEnd;
 
-	private String sessionType;
+	private SessionType sessionType;
 
 	private String speakerId;
 
+	private boolean favourite;
+
+	@NonNull
 	public String getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(@NonNull String id)
 	{
 		this.id = id;
 	}
@@ -113,12 +116,12 @@ public class Session
 		this.timeEnd = timeEnd;
 	}
 
-	public String getSessionType()
+	public SessionType getSessionType()
 	{
 		return sessionType;
 	}
 
-	public void setSessionType(String sessionType)
+	public void setSessionType(SessionType sessionType)
 	{
 		this.sessionType = sessionType;
 	}
@@ -131,5 +134,15 @@ public class Session
 	public void setSpeakerId(String speakerId)
 	{
 		this.speakerId = speakerId;
+	}
+
+	public boolean isFavourite()
+	{
+		return favourite;
+	}
+
+	public void setFavourite(boolean favourite)
+	{
+		this.favourite = favourite;
 	}
 }

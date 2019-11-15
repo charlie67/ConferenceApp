@@ -18,4 +18,7 @@ public interface SessionDao
 
 	@Query("SELECT * FROM sessions")
 	LiveData<List<Session>> getAllSessions();
+
+	@Query("SELECT * FROM sessions where favourite = 0")
+	LiveData<List<Session>> getAllFavouriteSessions();
 }
