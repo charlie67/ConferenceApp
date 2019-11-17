@@ -17,20 +17,14 @@ public class SessionViewModel extends AndroidViewModel
 	private LiveData<List<Session>> sessionList;
 	private SessionsRecyclerWithListAdapter adapter;
 
-	public SessionViewModel(@NonNull Application application, boolean allSessions)
+	public SessionViewModel(@NonNull Application application)
 	{
 		super(application);
 
 		repository = new ConferenceRepository(application);
 
-		if (allSessions)
-		{
-			sessionList = repository.getAllSessions();
-		}
-		else
-		{
-			sessionList = repository.getAllFavouriteSessions();
-		}
+		sessionList = repository.getAllSessions();
+
 	}
 
 	public LiveData<List<Session>> getSessionList()

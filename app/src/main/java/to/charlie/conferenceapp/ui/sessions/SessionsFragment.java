@@ -33,7 +33,7 @@ public class SessionsFragment extends Fragment
 		sessionsRecyclerAdapter = sessionViewModel.getAdapter();
 		if (sessionsRecyclerAdapter == null)
 		{
-			sessionsRecyclerAdapter = new SessionsRecyclerWithListAdapter(getContext());
+			sessionsRecyclerAdapter = new SessionsRecyclerWithListAdapter();
 			sessionViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
 			sessionViewModel.setAdapter(sessionsRecyclerAdapter);
 		}

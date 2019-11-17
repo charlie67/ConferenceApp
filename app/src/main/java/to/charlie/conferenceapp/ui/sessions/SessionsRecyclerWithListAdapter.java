@@ -1,15 +1,18 @@
 package to.charlie.conferenceapp.ui.sessions;
 
-import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
@@ -22,14 +25,8 @@ import to.charlie.conferenceapp.model.Session;
 
 public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<SessionsRecyclerWithListAdapter.ViewHolder>
 {
-	private final Context context;
 	private List<Session> dataSet;
 	private View.OnClickListener clickListener;
-
-	SessionsRecyclerWithListAdapter(Context context)
-	{
-		this.context = context;
-	}
 
 	/**
 	 * Called by the RecyclerView asking for a ViewHolder object
@@ -116,14 +113,16 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		TextView sessionTitle;
 		TextView sessionType;
 
-		private String sessionId;
+		View itemView;
 
 		Locale currentLocale;
 
 		ViewHolder(@NonNull View itemView)
 		{
 			super(itemView);
-			itemView.setOnClickListener(v -> Toast.makeText(itemView.getContext(), "Clicked session " + sessionId, Toast.LENGTH_SHORT).show());
+
+			this.itemView = itemView;
+
 			Resources resources = itemView.getResources();
 
 			currentLocale = resources.getConfiguration().getLocales().get(0);
@@ -157,7 +156,16 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		 */
 		void bindDataSet(Session session)
 		{
-			sessionId = session.getId();
+			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
+			itemView.setOnClickListener(v ->
+			{
+				Log.i("clickListener", "ID is " + session.getId());
+				Bundle bundle = new Bundle();
+				//todo make this a static string somewhere
+				bundle.putString("session_id", session.getId());
+				navController.navigate(R.id.action_session_fragment_to_session_item_view, bundle);
+			});
+
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);
 			sessionTime.setText(session.getTimeStart());
