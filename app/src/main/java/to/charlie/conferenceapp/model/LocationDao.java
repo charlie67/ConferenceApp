@@ -1,5 +1,6 @@
 package to.charlie.conferenceapp.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -7,5 +8,5 @@ import androidx.room.Query;
 public interface LocationDao
 {
 	@Query("SELECT * FROM locations where id = :id")
-	Location findLocationById(String id);
+	LiveData<Location> findLocationById(String id);
 }

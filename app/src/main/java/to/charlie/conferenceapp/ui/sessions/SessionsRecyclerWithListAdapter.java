@@ -1,15 +1,14 @@
 package to.charlie.conferenceapp.ui.sessions;
 
 import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -111,7 +110,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		TextView sessionDay;
 		TextView sessionTime;
 		TextView sessionTitle;
-		TextView sessionType;
+		ImageView sessiontypeImage;
 
 		View itemView;
 
@@ -129,24 +128,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			this.sessionDay = itemView.findViewById(R.id.session_day_text_view);
 			this.sessionTime = itemView.findViewById(R.id.session_time_text_view);
 			this.sessionTitle = itemView.findViewById(R.id.session_title_text_view);
-			this.sessionType = itemView.findViewById(R.id.session_type_text_view);
-
-			//this sets the correct width of the text views so that the day time section occupies a
-			// quarter of the width and the title occupies the remainder
-			int screenWidthDp = resources.getConfiguration().screenWidthDp;
-			//2 dp margin either side of the screen
-			int screenWidthDpNoMargin = screenWidthDp - 2 - 2;
-
-			int dateAreaDpWidth = (int) (screenWidthDpNoMargin * 0.25);
-			int titleAreaDpWidth = (int) (screenWidthDpNoMargin * 0.75);
-
-			int dateAreaPxWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dateAreaDpWidth, resources.getDisplayMetrics());
-
-			int titleAreaPxWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, titleAreaDpWidth, resources.getDisplayMetrics());
-
-			sessionDay.setWidth(dateAreaPxWidth);
-			sessionTime.setWidth(dateAreaPxWidth);
-			sessionTitle.setWidth(titleAreaPxWidth);
+			this.sessiontypeImage = itemView.findViewById(R.id.session_type_image_view);
 		}
 
 		/**
@@ -157,20 +139,48 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		void bindDataSet(Session session)
 		{
 			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
-			itemView.setOnClickListener(v ->
-			{
-				Log.i("clickListener", "ID is " + session.getId());
-				Bundle bundle = new Bundle();
-				//todo make this a static string somewhere
-				bundle.putString("session_id", session.getId());
-				navController.navigate(R.id.action_session_fragment_to_session_item_view, bundle);
-			});
+
+			itemView.setOnClickListener(v -> navController.navigate(R.id.action_session_fragment_to_session_item_view, session.toBundle()));
 
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);
 			sessionTime.setText(session.getTimeStart());
 			sessionTitle.setText(session.getTitle());
-			sessionType.setText(session.getSessionType().getTypeName());
+
+			//set the icon type for the session
+			switch (session.getSessionType())
+			{
+				case TALK:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_chat_bubble_black_24dp));
+					break;
+
+				case LUNCH:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_restaurant_black_24dp));
+					break;
+
+				case COFFEE:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_weekend_black_24dp));
+					break;
+
+				case DINNER:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_room_service_black_24dp));
+					break;
+
+				case WORKSHOP:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_stay_current_portrait_black_24dp));
+					break;
+
+				case REGISTRATION:
+					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+									R.drawable.ic_work_black_24dp));
+					break;
+
+			}
 		}
 	}
 }

@@ -1,9 +1,13 @@
 package to.charlie.conferenceapp.model;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import java.security.InvalidParameterException;
 
 import to.charlie.conferenceapp.model.util.SessionTypeConverter;
 
@@ -11,6 +15,79 @@ import to.charlie.conferenceapp.model.util.SessionTypeConverter;
 @TypeConverters({SessionTypeConverter.class})
 public class Session
 {
+	private static final String SESSION_ID_BUNDLE_KEY = "SESSION_ID";
+
+	private static final String SESSION_TITLE_BUNDLE_KEY = "SESSION_TITLE";
+
+	private static final String SESSION_CONTENT_BUNDLE_KEY = "SESSION_CONTENT";
+
+	private static final String SESSION_LOCATION_ID_BUNDLE_KEY = "SESSION_LOCATION_ID";
+
+	private static final String SESSION_DATE_BUNDLE_KEY = "SESSION_DATE";
+
+	private static final String SESSION_ORDER_BUNDLE_KEY = "SESSION_ORDER";
+
+	private static final String SESSION_TIME_START_BUNDLE_KEY = "SESSION_TIME_START";
+
+	private static final String SESSION_TIME_END_BUNDLE_KEY = "SESSION_TIME_END";
+
+	private static final String SESSION_TYPE_BUNDLE_KEY = "SESSION_TYPE";
+
+	private static final String SESSION_SPEAKER_ID_BUNDLE_KEY = "SESSION_SPEAKER_ID";
+
+	private static final String SESSION_FAVOURITE_BUNDLE_KEY = "SESSION_FAVOURITE";
+
+	public static Session SessionFromBundle(Bundle bundle) throws InvalidParameterException
+	{
+		String id = bundle.getString(SESSION_ID_BUNDLE_KEY);
+
+		if (id == null)
+		{
+			throw new InvalidParameterException("ID is null");
+		}
+
+		return new Session(id, bundle.getString(SESSION_TITLE_BUNDLE_KEY),
+						bundle.getString(SESSION_CONTENT_BUNDLE_KEY), bundle.getString(SESSION_LOCATION_ID_BUNDLE_KEY),
+						bundle.getString(SESSION_DATE_BUNDLE_KEY), bundle.getInt(SESSION_ORDER_BUNDLE_KEY),
+						bundle.getString(SESSION_TIME_START_BUNDLE_KEY), bundle.getString(SESSION_TIME_END_BUNDLE_KEY),
+						SessionTypeConverter.toSessionType(bundle.getString(SESSION_TYPE_BUNDLE_KEY)),
+						bundle.getString(SESSION_SPEAKER_ID_BUNDLE_KEY), bundle.getBoolean(SESSION_FAVOURITE_BUNDLE_KEY));
+	}
+
+	Session(@NonNull String id, String title, String content, String locationId, String sessionDate, int sessionOrder, String timeStart, String timeEnd, SessionType sessionType, String speakerId, boolean favourite)
+	{
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.locationId = locationId;
+		this.sessionDate = sessionDate;
+		this.sessionOrder = sessionOrder;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.sessionType = sessionType;
+		this.speakerId = speakerId;
+		this.favourite = favourite;
+	}
+
+	public Bundle toBundle()
+	{
+		Bundle bundle = new Bundle();
+		bundle.putString(SESSION_ID_BUNDLE_KEY, id);
+		bundle.putString(SESSION_TITLE_BUNDLE_KEY, title);
+		bundle.putString(SESSION_CONTENT_BUNDLE_KEY, content);
+		bundle.putString(SESSION_LOCATION_ID_BUNDLE_KEY, locationId);
+		bundle.putString(SESSION_DATE_BUNDLE_KEY, sessionDate);
+		bundle.putInt(SESSION_ORDER_BUNDLE_KEY, sessionOrder);
+		bundle.putString(SESSION_TIME_START_BUNDLE_KEY, timeStart);
+		bundle.putString(SESSION_TIME_END_BUNDLE_KEY, timeEnd);
+		bundle.putString(SESSION_TYPE_BUNDLE_KEY, SessionTypeConverter.toString(sessionType));
+		bundle.putString(SESSION_SPEAKER_ID_BUNDLE_KEY, speakerId);
+		bundle.putBoolean(SESSION_FAVOURITE_BUNDLE_KEY, favourite);
+
+
+		return bundle;
+	}
+
 	@PrimaryKey()
 	@NonNull
 	private String id;

@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import to.charlie.conferenceapp.R;
-import to.charlie.conferenceapp.model.SessionViewModel;
+import to.charlie.conferenceapp.model.SessionListViewModel;
 
 public class SessionsFragment extends Fragment
 {
-	private SessionViewModel sessionViewModel;
+	private SessionListViewModel sessionListViewModel;
 	private SessionsRecyclerWithListAdapter sessionsRecyclerAdapter;
 
 	public SessionsFragment()
@@ -29,13 +29,13 @@ public class SessionsFragment extends Fragment
 		// Inflate the layout for this fragment
 		final View view = inflater.inflate(R.layout.fragment_sessions, container, false);
 
-		sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
-		sessionsRecyclerAdapter = sessionViewModel.getAdapter();
+		sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
+		sessionsRecyclerAdapter = sessionListViewModel.getAdapter();
 		if (sessionsRecyclerAdapter == null)
 		{
 			sessionsRecyclerAdapter = new SessionsRecyclerWithListAdapter();
-			sessionViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
-			sessionViewModel.setAdapter(sessionsRecyclerAdapter);
+			sessionListViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
+			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}
 
 		RecyclerView listSessions = view.findViewById(R.id.session_list);
@@ -44,6 +44,4 @@ public class SessionsFragment extends Fragment
 
 		return view;
 	}
-
-
 }
