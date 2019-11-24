@@ -111,6 +111,14 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 				LiveData<Speaker> speakerLiveData = sessionViewModel.getSpeakerWithId(session.getSpeakerId());
 				speakerLiveData.observe(this, this::setSpeakerInfo);
 			}
+			else
+			{
+				//if there isn't a speaker then these views need to be gone because otherwise there's
+				// just a huge empty space
+				speakerBiography.setVisibility(View.GONE);
+				speakerImage.setVisibility(View.GONE);
+				speakerName.setVisibility(View.GONE);
+			}
 
 		}
 
