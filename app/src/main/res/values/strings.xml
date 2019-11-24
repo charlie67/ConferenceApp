@@ -12,4 +12,6 @@
     <string name="nav_favourites">Favourites</string>
     <string name="nav_timetable">Timetable</string>
     <string name="session_view_image_description">The session type</string>
+    <string name="speaker_image_content_description">Picture of the speaker</string>
+    <string name="speaker_name_first_part">Speaker:</string>
 </resources>

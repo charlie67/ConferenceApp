@@ -4,78 +4,157 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="5dp"
+    android:paddingStart="5dp"
+    android:background="@color/primaryColor"
+    android:scrollbars="vertical"
+
     tools:context=".ui.sessions.SessionItemFragment">
 
 
     <TextView
+        style="@style/SessionTextView"
         android:id="@+id/session_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="24sp"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/session_view_session_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/session_view_title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="1dp"
+        android:background="#363c41"
 
         app:layout_constraintTop_toBottomOf="@id/session_view_title"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/session_view_speaker_name"
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_session_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+
+        app:layout_constraintTop_toBottomOf="@id/session_view_title_divider"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
 
         app:layout_constraintTop_toBottomOf="@id/session_view_session_type"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/session_view_date"
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
 
-        app:layout_constraintTop_toBottomOf="@id/session_view_speaker_name"
+        app:layout_constraintTop_toBottomOf="@id/session_view_date_time"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
-        android:id="@+id/session_view_time"
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_session_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/primaryLightColor"
 
-        app:layout_constraintTop_toBottomOf="@id/session_view_date"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_view_location" />
 
     <View
         android:id="@+id/session_view_header_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:paddingTop="5dp"
-        android:layout_marginTop="1dp"
-        android:background="#363c41"
-
-        app:layout_constraintTop_toBottomOf="@id/session_view_time"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/session_view_session_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/session_view_header_divider"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/session_view_session_description_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:paddingTop="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:background="#363c41"
 
         app:layout_constraintTop_toBottomOf="@id/session_view_session_description"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_speaker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+
+        app:layout_constraintTop_toBottomOf="@id/session_view_session_description"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/session_view_speaker_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/speaker_image_content_description"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_view_speaker_name"
+
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_speaker_biography"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+
+        app:layout_constraintStart_toEndOf="@id/session_view_speaker_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_view_speaker_name" />
+
+
+    <!--    The barrier goes to the lower point of either the speaker name or the time, this then allows the location to be constrained to it-->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/speaker_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="session_view_speaker_biography,session_view_speaker_picture" />
+
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_location_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+
+        app:layout_constraintTop_toBottomOf="@id/speaker_barrier"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/session_view_location_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryLightColor"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_view_location_name" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/session_view_location_map"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_view_location_description" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
