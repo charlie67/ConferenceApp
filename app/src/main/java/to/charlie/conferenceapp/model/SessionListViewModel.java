@@ -13,7 +13,6 @@ import to.charlie.conferenceapp.ui.sessions.SessionsRecyclerWithListAdapter;
 
 public class SessionListViewModel extends AndroidViewModel
 {
-	private ConferenceRepository repository;
 	private LiveData<List<Session>> sessionList;
 	private SessionsRecyclerWithListAdapter adapter;
 
@@ -21,7 +20,7 @@ public class SessionListViewModel extends AndroidViewModel
 	{
 		super(application);
 
-		repository = new ConferenceRepository(application);
+		ConferenceRepository repository = new ConferenceRepository(application);
 
 		sessionList = repository.getAllSessions();
 	}
