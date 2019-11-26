@@ -15,12 +15,25 @@
     <TextView
         style="@style/SessionTextView"
         android:id="@+id/session_view_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="24sp"
 
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/session_view_set_favourite_button"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/session_view_set_favourite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:contentDescription="@string/session_view_favourite_button_text"
+        android:background="@color/primaryColor"
+        android:tint="@color/primaryTextColor"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/session_view_title_divider"

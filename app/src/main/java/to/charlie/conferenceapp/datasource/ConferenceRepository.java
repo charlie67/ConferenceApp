@@ -29,6 +29,11 @@ public class ConferenceRepository
 		speakerDao = db.getSpeakerDao();
 	}
 
+	public void setSessionAsFavourite(Session session)
+	{
+		new SetSessionFavouriteAsyncTask(sessionDao).execute(session);
+	}
+
 	public LiveData<List<Session>> getAllSessions()
 	{
 		return sessionDao.getAllSessions();
@@ -49,18 +54,25 @@ public class ConferenceRepository
 		return locationDao.findLocationById(locationId);
 	}
 
-	private static class getSpeakerAsyncTask extends AsyncTask<String, Void, Speaker>
+	private static class SetSessionFavouriteAsyncTask extends AsyncTask<Session, Void, Void>
 	{
-		SpeakerDao mAsyncTaskDao;
+		SessionDao mAsyncTaskDao;
 
-		getSpeakerAsyncTask(SpeakerDao mAsyncTaskDao)
+		SetSessionFavouriteAsyncTask(SessionDao mAsyncTaskDao)
 		{
 			this.mAsyncTaskDao = mAsyncTaskDao;
 		}
 
-		protected Speaker doInBackground(final String... id)
+		protected Void doInBackground(final Session... sessions)
 		{
-			mAsyncTaskDao.findSpeakerById(id[0]);
+			for (Session session : sessions)
+			{
+				// get the current favourite state and invert it. Then insert the new session into the
+				// database
+				boolean currentFavouriteState = session.isFavourite();
+				session.setFavourite(!currentFavouriteState);
+				mAsyncTaskDao.updateSession(session);
+			}
 			return null;
 		}
 

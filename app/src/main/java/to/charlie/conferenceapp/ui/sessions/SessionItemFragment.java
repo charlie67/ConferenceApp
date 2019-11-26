@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +42,8 @@ import static androidx.core.util.Preconditions.checkArgument;
 
 public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 {
+	private SessionViewModel sessionViewModel;
+
 	private TextView speakerName;
 	private TextView speakerBiography;
 	private ImageView speakerImage;
@@ -51,7 +54,10 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 
 	private MapView locationMap;
 
+	private ImageButton favouriteButton;
+
 	private Location location;
+	private Session session;
 
 	@Nullable
 	@Override
@@ -59,12 +65,14 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	{
 		// Inflate the layout for this fragment
 		final View view = inflater.inflate(R.layout.fragment_session_item, container, false);
-		SessionViewModel sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
+		sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
 
 		TextView sessionTitle = view.findViewById(R.id.session_view_title);
 		TextView sessionDateTime = view.findViewById(R.id.session_view_date_time);
 		TextView sessionDescription = view.findViewById(R.id.session_view_session_description);
 		TextView sessionType = view.findViewById(R.id.session_view_session_type);
+
+		favouriteButton = view.findViewById(R.id.session_view_set_favourite_button);
 
 		speakerName = view.findViewById(R.id.session_view_speaker_name);
 		speakerImage = view.findViewById(R.id.session_view_speaker_picture);
@@ -80,12 +88,12 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 		Bundle arguments = getArguments();
 		if (arguments != null)
 		{
-			Session session = Session.SessionFromBundle(arguments);
+			session = Session.SessionFromBundle(arguments);
 
 			LocalDate sessionInLocalDate = LocalDate.parse(session.getSessionDate());
 			Locale locale = view.getResources().getConfiguration().getLocales().get(0);
 
-			//want to display the date as Wednesday 12th December 2019
+			//want to display the date as e.g. Wednesday 11th December 2019
 			String dayOfWeek = sessionInLocalDate.getDayOfWeek().getDisplayName(TextStyle.FULL, locale);
 			String dayOfMonth = String.valueOf(sessionInLocalDate.getDayOfMonth());
 			String daySuffix = getDayOfMonthSuffix(sessionInLocalDate.getDayOfMonth());
@@ -100,6 +108,15 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 			sessionDateTime.setText(dateTimeString);
 			sessionDescription.setText(session.getContent());
 			sessionType.setText(session.getSessionType().getTypeName());
+
+			// by default the icon is set to the not favourite state so only needs setting if it is
+			// actually a favourite
+			if (session.isFavourite())
+			{
+				favouriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp, null));
+			}
+
+			favouriteButton.setOnClickListener(this::favouriteButtonOnClickListener);
 
 			LiveData<Location> locationLiveData = sessionViewModel.getLocationWithId(session.getLocationId());
 			locationLiveData.observe(this, this::setLocationInfo);
@@ -123,6 +140,23 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 		}
 
 		return view;
+	}
+
+	private void favouriteButtonOnClickListener(View v)
+	{
+		// get the current favourite state and invert that because it is being updated to the opposite
+		// of what it was
+		boolean favourite = !session.isFavourite();
+		sessionViewModel.setSessionAsFavourite(session);
+
+		if (favourite)
+		{
+			favouriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp, null));
+		}
+		else
+		{
+			favouriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp, null));
+		}
 	}
 
 	String getDayOfMonthSuffix(final int n)
@@ -189,6 +223,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	public void onResume()
 	{
 		super.onResume();
+		//need to call the method on the map to ensure it correctly works
 		locationMap.onResume();
 	}
 
@@ -196,6 +231,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	public void onPause()
 	{
 		super.onPause();
+		//need to call the method on the map to ensure it correctly works
 		locationMap.onPause();
 	}
 
@@ -203,6 +239,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	public void onDestroy()
 	{
 		super.onDestroy();
+		//need to call the method on the map to ensure it correctly works
 		locationMap.onDestroy();
 	}
 
@@ -210,6 +247,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	public void onLowMemory()
 	{
 		super.onLowMemory();
+		//need to call the method on the map to ensure it correctly works
 		locationMap.onLowMemory();
 	}
 }

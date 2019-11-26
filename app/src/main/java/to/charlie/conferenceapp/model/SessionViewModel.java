@@ -29,4 +29,9 @@ public class SessionViewModel extends AndroidViewModel
 		return repository.getLocationWithId(id);
 	}
 
+	public void setSessionAsFavourite(Session sessionToSetAsFavourite)
+	{
+		repository.setSessionAsFavourite(sessionToSetAsFavourite);
+	}
+
 }
