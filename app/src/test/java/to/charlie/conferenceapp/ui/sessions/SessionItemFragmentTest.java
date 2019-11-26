@@ -8,7 +8,7 @@ public class SessionItemFragmentTest
 {
 
 	@Test
-	public void tesstGetDayOfMonthSuffixForLegalDay()
+	public void testGetDayOfMonthSuffixForRealDay()
 	{
 		SessionItemFragment sessionItemFragment = new SessionItemFragment();
 
