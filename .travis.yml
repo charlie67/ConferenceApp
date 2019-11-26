@@ -1,4 +1,4 @@
-# from https://github.com/hannesa2/DbPreferences/blob/77e5278b27aa2dd6759b9145732d01f978b41638/.travis.yml
+# originally from https://github.com/hannesa2/DbPreferences/blob/77e5278b27aa2dd6759b9145732d01f978b41638/.travis.yml and then slightly changed to fit my needs
 # licensed under apache v2 https://github.com/hannesa2/DbPreferences/blob/master/README.md
 
 sudo: true
