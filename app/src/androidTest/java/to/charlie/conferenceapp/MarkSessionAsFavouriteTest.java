@@ -25,7 +25,7 @@ import static org.junit.Assert.assertFalse;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MarkAsFavouriteTest
+public class MarkSessionAsFavouriteTest
 {
 	// This is a JUnit Test Rules that swaps the background executor used by the Architecture
 	// Components with one that executes synchronously instead.
@@ -60,5 +60,9 @@ public class MarkAsFavouriteTest
 
 		LiveData<List<Session>> favouriteSessionList = sessionDao.getAllFavouriteSessions();
 		assertEquals(1, LiveDataTestUtil.getValue(favouriteSessionList).size());
+
+		//need to ensure that you clean up after the test
+		sessionToTest.setFavourite(false);
+		sessionDao.updateSession(sessionToTest);
 	}
 }
