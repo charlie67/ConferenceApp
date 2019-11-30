@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -211,12 +212,35 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 		locationMap.getMapAsync(this);
 	}
 
+	public boolean onMapTouchEvent(MotionEvent ev)
+	{
+		int action = ev.getAction();
+		switch (action)
+		{
+			case MotionEvent.ACTION_DOWN:
+				// Disallow ScrollView to intercept touch events.
+				getView().getParent().requestDisallowInterceptTouchEvent(true);
+				break;
+
+			case MotionEvent.ACTION_UP:
+				// Allow ScrollView to intercept touch events.
+				getView().getParent().requestDisallowInterceptTouchEvent(false);
+				break;
+		}
+
+		// Handle MapView's touch events.
+		locationMap.onTouchEvent(ev);
+		return true;
+	}
+
 	@Override
 	public void onMapReady(GoogleMap googleMap)
 	{
 		LatLng locationMarker = new LatLng(location.getLatitude(), location.getLongitude());
 		googleMap.addMarker(new MarkerOptions().position(locationMarker).title(location.getName()));
 		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMarker, 15.0f));
+
+//		googleMap.setOnMapLongClickListener(this::onMapTouchEvent);
 	}
 
 	@Override
