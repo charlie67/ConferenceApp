@@ -5,9 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewParent;
 
-import androidx.annotation.Nullable;
-
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 
 public class CustomMapView extends MapView
@@ -28,16 +25,6 @@ public class CustomMapView extends MapView
 	public CustomMapView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-	}
-
-	public CustomMapView(Context context, GoogleMapOptions options)
-	{
-		super(context, options);
-	}
-
-	public void setViewParent(@Nullable final ViewParent viewParent)
-	{ //any ViewGroup
-		mViewParent = viewParent;
 	}
 
 	@Override
