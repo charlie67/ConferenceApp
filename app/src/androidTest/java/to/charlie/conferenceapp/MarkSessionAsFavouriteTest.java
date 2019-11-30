@@ -27,18 +27,17 @@ import static org.junit.Assert.assertFalse;
 @LargeTest
 public class MarkSessionAsFavouriteTest
 {
-	// This is a JUnit Test Rules that swaps the background executor used by the Architecture
+	// This is a JUnit Test Rule that swaps the background executor used by the Architecture
 	// Components with one that executes synchronously instead.
 	@Rule
 	public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-	ConferenceRoomDatabase db;
-	SessionDao sessionDao;
+	private SessionDao sessionDao;
 
 	@Before
 	public void setup()
 	{
-		db = Injection.getDatabase(ApplicationProvider.getApplicationContext());
+		ConferenceRoomDatabase db = Injection.getDatabase(ApplicationProvider.getApplicationContext());
 		sessionDao = db.getSessionDao();
 	}
 
@@ -46,11 +45,6 @@ public class MarkSessionAsFavouriteTest
 	public void testThatFavoritingSessionActuallyFavouritesASession() throws Exception
 	{
 		Session sessionToTest = sessionDao.findSessionById("arkit");
-		sessionToTest.setFavourite(false);
-		//ensure we are starting from a clean slate
-		sessionDao.updateSession(sessionToTest);
-
-		sessionToTest = sessionDao.findSessionById("arkit");
 		assertFalse(sessionToTest.isFavourite());
 
 		sessionToTest.setFavourite(true);
@@ -60,9 +54,18 @@ public class MarkSessionAsFavouriteTest
 
 		LiveData<List<Session>> favouriteSessionList = sessionDao.getAllFavouriteSessions();
 		assertEquals(1, LiveDataTestUtil.getValue(favouriteSessionList).size());
+		assertEquals("arkit", LiveDataTestUtil.getValue(favouriteSessionList).get(0).getId());
 
-		//need to ensure that you clean up after the test
+		//need to ensure that the data is the same at the end of the test and the start of the test
+		//in case other tests need this data
 		sessionToTest.setFavourite(false);
 		sessionDao.updateSession(sessionToTest);
+	}
+
+	@Test
+	public void testThatByDefaultNoFavouritesAreSet() throws InterruptedException
+	{
+		LiveData<List<Session>> favouriteSessionList = sessionDao.getAllFavouriteSessions();
+		assertEquals(0, LiveDataTestUtil.getValue(favouriteSessionList).size());
 	}
 }
