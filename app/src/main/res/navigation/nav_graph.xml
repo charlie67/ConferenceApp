@@ -15,16 +15,24 @@
             app:destination="@+id/sessionItemFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
+
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="to.charlie.conferenceapp.ui.favourites.FavouritesFragment"
         android:label="fragment_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites">
+        <action
+            android:id="@+id/action_favourites_fragment_to_session_item_view"
+            app:destination="@+id/sessionItemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+
     <fragment
         android:id="@+id/speakersFragment"
         android:name="to.charlie.conferenceapp.ui.speakers.SpeakersFragment"
         android:label="fragment_speakers"
         tools:layout="@layout/fragment_speakers" />
+
     <fragment
         android:id="@+id/sessionItemFragment"
         android:name="to.charlie.conferenceapp.ui.sessions.SessionItemFragment"
