@@ -36,6 +36,7 @@ import java.util.Locale;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.Location;
 import to.charlie.conferenceapp.model.Session;
+import to.charlie.conferenceapp.model.SessionType;
 import to.charlie.conferenceapp.model.SessionViewModel;
 import to.charlie.conferenceapp.model.Speaker;
 
@@ -109,6 +110,12 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 			sessionDateTime.setText(dateTimeString);
 			sessionDescription.setText(session.getContent());
 			sessionType.setText(session.getSessionType().getTypeName());
+
+			// you can only favourite workshops and talks
+			if (!(session.getSessionType().equals(SessionType.WORKSHOP) || session.getSessionType().equals(SessionType.TALK)))
+			{
+				favouriteButton.setVisibility(View.GONE);
+			}
 
 			// by default the icon is set to the not favourite state so only needs setting if it is
 			// actually a favourite
@@ -190,7 +197,10 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 		speakerBiography.setText(speaker.getBiography());
 
 		AssetManager assetManager = getResources().getAssets();
-		try (InputStream is = assetManager.open("images/" + speaker.getId() + ".jpg"))
+
+		//trim the speaker id for image because danieltull id has a space in it but the image path
+		// doesn't
+		try (InputStream is = assetManager.open("images/" + speaker.getId().trim() + ".jpg"))
 		{
 			Bitmap bitmap = BitmapFactory.decodeStream(is);
 			speakerImage.setImageBitmap(bitmap);

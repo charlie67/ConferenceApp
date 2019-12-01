@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
+import to.charlie.conferenceapp.ui.model.SessionsRecyclerWithListAdapter;
 
 public class SessionsFragment extends Fragment
 {
-	private SessionListViewModel sessionListViewModel;
 	private SessionsRecyclerWithListAdapter sessionsRecyclerAdapter;
 
 	public SessionsFragment()
@@ -29,7 +29,7 @@ public class SessionsFragment extends Fragment
 		// Inflate the layout for this fragment
 		final View view = inflater.inflate(R.layout.fragment_sessions, container, false);
 
-		sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
+		SessionListViewModel sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
 		sessionsRecyclerAdapter = sessionListViewModel.getAdapter();
 		if (sessionsRecyclerAdapter == null)
 		{

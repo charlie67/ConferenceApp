@@ -9,20 +9,45 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import to.charlie.conferenceapp.datasource.ConferenceRepository;
-import to.charlie.conferenceapp.ui.sessions.SessionsRecyclerWithListAdapter;
+import to.charlie.conferenceapp.ui.model.SessionsRecyclerWithListAdapter;
 
 public class SessionListViewModel extends AndroidViewModel
 {
 	private LiveData<List<Session>> sessionList;
 	private SessionsRecyclerWithListAdapter adapter;
+	private ConferenceRepository repository;
+
+	/**
+	 * This model is used for both the session list and the favourites list, this variable is set
+	 * to true when this is being used for the favourites list
+	 */
+	private boolean favouriteList;
 
 	public SessionListViewModel(@NonNull Application application)
 	{
 		super(application);
 
-		ConferenceRepository repository = new ConferenceRepository(application);
+		repository = new ConferenceRepository(application);
 
-		sessionList = repository.getAllSessions();
+		calculateDataList();
+	}
+
+	private void calculateDataList()
+	{
+		if (favouriteList)
+		{
+			sessionList = repository.getAllFavouriteSessions();
+		}
+		else
+		{
+			sessionList = repository.getAllSessions();
+		}
+	}
+
+	public void setFavourites(boolean favouriteList)
+	{
+		this.favouriteList = favouriteList;
+		calculateDataList();
 	}
 
 	public LiveData<List<Session>> getSessionList()

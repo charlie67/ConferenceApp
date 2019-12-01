@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.sessions;
+package to.charlie.conferenceapp.ui.model;
 
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ import to.charlie.conferenceapp.model.Session;
 public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<SessionsRecyclerWithListAdapter.ViewHolder>
 {
 	private List<Session> dataSet;
-	private View.OnClickListener clickListener;
+	private boolean favouritesList = false;
 
 	/**
 	 * Called by the RecyclerView asking for a ViewHolder object
@@ -79,26 +79,25 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	}
 
 	/**
-	 * Allows clicks events to be caught
-	 *
-	 * @param itemClickListener The provided listener invoked when someone clicks on an item in the grid
-	 */
-	void setOnClickListener(View.OnClickListener itemClickListener)
-	{
-		this.clickListener = itemClickListener;
-	}
-
-	/**
 	 * If the data set is reset, then we need to let the adapter know.
 	 *
 	 * @param dataSet The updated dataSet
 	 */
-	void changeDataSet(List<Session> dataSet)
+	public void changeDataSet(List<Session> dataSet)
 	{
 		this.dataSet = dataSet;
 		notifyDataSetChanged();
 	}
 
+	/**
+	 * Set that this recycler view is being used for the favourites list
+	 *
+	 * @param favouritesList true if this is being used to show the favourites list otherwise false
+	 */
+	public void setFavouritesList(boolean favouritesList)
+	{
+		this.favouritesList = favouritesList;
+	}
 
 	/**
 	 * Provides a reference to the views for each data item. Caches as much as possible.
@@ -110,7 +109,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		TextView sessionDay;
 		TextView sessionTime;
 		TextView sessionTitle;
-		ImageView sessiontypeImage;
+		ImageView sessionTypeImage;
 
 		View itemView;
 
@@ -128,7 +127,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			this.sessionDay = itemView.findViewById(R.id.session_day_text_view);
 			this.sessionTime = itemView.findViewById(R.id.session_time_text_view);
 			this.sessionTitle = itemView.findViewById(R.id.session_title_text_view);
-			this.sessiontypeImage = itemView.findViewById(R.id.session_type_image_view);
+			this.sessionTypeImage = itemView.findViewById(R.id.session_type_image_view);
 		}
 
 		/**
@@ -140,7 +139,14 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		{
 			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
 
-			itemView.setOnClickListener(v -> navController.navigate(R.id.action_session_fragment_to_session_item_view, session.toBundle()));
+			if (favouritesList)
+			{
+				itemView.setOnClickListener(v -> navController.navigate(R.id.action_favourites_fragment_to_session_item_view, session.toBundle()));
+			}
+			else
+			{
+				itemView.setOnClickListener(v -> navController.navigate(R.id.action_session_fragment_to_session_item_view, session.toBundle()));
+			}
 
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);
@@ -151,32 +157,32 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			switch (session.getSessionType())
 			{
 				case TALK:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_chat_bubble_black_24dp));
 					break;
 
 				case LUNCH:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_restaurant_black_24dp));
 					break;
 
 				case COFFEE:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_weekend_black_24dp));
 					break;
 
 				case DINNER:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_room_service_black_24dp));
 					break;
 
 				case WORKSHOP:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_stay_current_portrait_black_24dp));
 					break;
 
 				case REGISTRATION:
-					sessiontypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					sessionTypeImage.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
 									R.drawable.ic_work_black_24dp));
 					break;
 
