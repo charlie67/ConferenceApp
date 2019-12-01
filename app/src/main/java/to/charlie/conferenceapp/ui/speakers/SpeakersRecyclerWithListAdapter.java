@@ -1,0 +1,96 @@
+package to.charlie.conferenceapp.ui.speakers;
+
+import android.content.res.AssetManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import to.charlie.conferenceapp.R;
+import to.charlie.conferenceapp.model.Speaker;
+import to.charlie.conferenceapp.model.util.ResourceUtil;
+
+public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<SpeakersRecyclerWithListAdapter.ViewHolder>
+{
+	private List<Speaker> dataSet;
+
+	public class ViewHolder extends RecyclerView.ViewHolder
+	{
+		ImageView speakerImage;
+		TextView speakerName;
+
+		AssetManager assetManger;
+
+		ViewHolder(View itemView)
+		{
+			super(itemView);
+			assetManger = itemView.getResources().getAssets();
+
+			this.speakerImage = itemView.findViewById(R.id.speaker_list_speaker_image);
+			this.speakerName = itemView.findViewById(R.id.speaker_list_speaker_name);
+		}
+
+		void bindDataSet(Speaker speaker)
+		{
+			speakerName.setText(speaker.getName());
+
+			ResourceUtil.setImageOnImageView(speakerImage, speaker.getId().trim(), assetManger);
+		}
+	}
+
+
+	@NonNull
+	@Override
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+	{
+		//create the new view
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_speaker_item,
+						parent, false);
+		return new ViewHolder(view);
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+	{
+		// Delegate the binding to the ViewHolder
+		if (dataSet != null)
+		{
+			holder.bindDataSet(dataSet.get(position));
+		}
+	}
+
+	/**
+	 * Return the size of your dataset (invoked by the layout manager)
+	 *
+	 * @return The size of the dataset. The layout manager needs to know.
+	 */
+	@Override
+	public int getItemCount()
+	{
+		if (dataSet != null)
+		{
+			return dataSet.size();
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	/**
+	 * If the data set is reset, then we need to let the adapter know.
+	 *
+	 * @param dataSet The updated dataSet
+	 */
+	void changeDataSet(List<Speaker> dataSet)
+	{
+		this.dataSet = dataSet;
+		notifyDataSetChanged();
+	}
+}

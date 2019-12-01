@@ -1,11 +1,8 @@
 package to.charlie.conferenceapp.ui.sessions;
 
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,8 +24,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -39,6 +34,7 @@ import to.charlie.conferenceapp.model.Session;
 import to.charlie.conferenceapp.model.SessionType;
 import to.charlie.conferenceapp.model.SessionViewModel;
 import to.charlie.conferenceapp.model.Speaker;
+import to.charlie.conferenceapp.model.util.ResourceUtil;
 
 import static androidx.core.util.Preconditions.checkArgument;
 
@@ -200,14 +196,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 
 		//trim the speaker id for image because danieltull id has a space in it but the image path
 		// doesn't
-		try (InputStream is = assetManager.open("images/" + speaker.getId().trim() + ".jpg"))
-		{
-			Bitmap bitmap = BitmapFactory.decodeStream(is);
-			speakerImage.setImageBitmap(bitmap);
-		} catch (IOException e)
-		{
-			Log.e("Speaker Image", "Error opening speaker image file", e);
-		}
+		ResourceUtil.setImageOnImageView(speakerImage, speaker.getId().trim(), assetManager);
 
 	}
 

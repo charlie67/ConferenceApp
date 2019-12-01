@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="125dp">
+
+    <ImageView
+        android:id="@+id/speaker_list_speaker_image"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/speaker_list_speaker_image_content_description"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/SpeakerTextView"
+        android:id="@+id/speaker_list_speaker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speaker_list_speaker_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>
