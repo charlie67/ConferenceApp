@@ -29,10 +29,10 @@ public class SessionListViewModel extends AndroidViewModel
 
 		repository = new ConferenceRepository(application);
 
-		calculateDataList();
+		searchForSessions();
 	}
 
-	private void calculateDataList()
+	private void searchForSessions()
 	{
 		if (favouriteList)
 		{
@@ -47,7 +47,7 @@ public class SessionListViewModel extends AndroidViewModel
 	public void setFavourites(boolean favouriteList)
 	{
 		this.favouriteList = favouriteList;
-		calculateDataList();
+		searchForSessions();
 	}
 
 	public LiveData<List<Session>> getSessionList()
