@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import to.charlie.conferenceapp.datasource.ConferenceRepository;
-import to.charlie.conferenceapp.ui.model.SessionsRecyclerWithListAdapter;
+import to.charlie.conferenceapp.ui.sessionList.SessionsRecyclerWithListAdapter;
 
 public class SessionListViewModel extends AndroidViewModel
 {

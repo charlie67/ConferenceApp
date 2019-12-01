@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.model;
+package to.charlie.conferenceapp.ui.sessionList;
 
 import android.content.res.Resources;
 import android.view.LayoutInflater;

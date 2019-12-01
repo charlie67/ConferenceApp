@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
-import to.charlie.conferenceapp.ui.model.SessionsRecyclerWithListAdapter;
+import to.charlie.conferenceapp.ui.sessionList.SessionsRecyclerWithListAdapter;
 
 public class FavouritesFragment extends Fragment
 {
