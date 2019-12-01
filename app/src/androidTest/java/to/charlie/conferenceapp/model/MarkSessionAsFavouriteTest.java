@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp;
+package to.charlie.conferenceapp.model;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
@@ -15,8 +15,6 @@ import java.util.List;
 
 import to.charlie.conferenceapp.datasource.ConferenceRoomDatabase;
 import to.charlie.conferenceapp.datasource.Injection;
-import to.charlie.conferenceapp.model.Session;
-import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.util.LiveDataTestUtil;
 
 import static junit.framework.TestCase.assertEquals;
