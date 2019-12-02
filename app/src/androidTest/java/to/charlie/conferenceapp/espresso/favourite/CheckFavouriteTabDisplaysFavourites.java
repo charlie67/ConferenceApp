@@ -1,25 +1,19 @@
 package to.charlie.conferenceapp.espresso.favourite;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.ViewAssertion;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import to.charlie.conferenceapp.R;
-import to.charlie.conferenceapp.datasource.ConferenceRoomDatabase;
-import to.charlie.conferenceapp.datasource.Injection;
-import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.ui.ConferenceAppMainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -33,20 +27,9 @@ import static to.charlie.conferenceapp.util.EspressoMatcherUtil.withIndex;
 @LargeTest
 public class CheckFavouriteTabDisplaysFavourites
 {
-	private Context context;
-	private SessionDao sessionDao;
-
 	@Rule
 	public ActivityTestRule<ConferenceAppMainActivity> activityActivityTestRule =
 					new ActivityTestRule<>(ConferenceAppMainActivity.class);
-
-	@Before
-	public void setup()
-	{
-		context = ApplicationProvider.getApplicationContext();
-		ConferenceRoomDatabase db = Injection.getDatabase(context);
-		sessionDao = db.getSessionDao();
-	}
 
 	@Test
 	public void seeThatSessionsMarkedAsFavouriteAreShownInFavouriteTab()
