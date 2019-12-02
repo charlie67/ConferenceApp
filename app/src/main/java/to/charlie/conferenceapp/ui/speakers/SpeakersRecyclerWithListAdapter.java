@@ -51,7 +51,7 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 		{
 			speakerName.setText(speaker.getName());
 
-			ResourceUtil.setImageOnImageView(speakerImage, speaker.getId().trim(), assetManger);
+			ResourceUtil.setImageOnImageViewAsync(speakerImage, "images/" + speaker.getId().trim() + ".jpg", assetManger);
 
 			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
 

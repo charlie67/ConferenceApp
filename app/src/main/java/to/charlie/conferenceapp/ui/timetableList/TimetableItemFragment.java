@@ -196,7 +196,7 @@ public class TimetableItemFragment extends Fragment implements OnMapReadyCallbac
 
 		//trim the speaker id for image because danieltull id has a space in it but the image path
 		// doesn't
-		ResourceUtil.setImageOnImageView(speakerImage, speaker.getId().trim(), assetManager);
+		ResourceUtil.setImageOnImageViewAsync(speakerImage, "images/" + speaker.getId().trim() + ".jpg", assetManager);
 
 	}
 
