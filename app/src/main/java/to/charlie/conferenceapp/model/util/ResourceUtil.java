@@ -29,39 +29,51 @@ public class ResourceUtil
 
 	public static void setImageOnImageViewAsync(ImageView imageView, String fileName, AssetManager assetManager)
 	{
-		SetImageViewAsyncTask setImageViewAsyncTask = new SetImageViewAsyncTask(imageView,
-						assetManager);
-
-		setImageViewAsyncTask.doInBackground(fileName);
+		new SetImageViewAsyncTask(imageView, assetManager, fileName).execute();
 	}
 
-	private static class SetImageViewAsyncTask extends AsyncTask<String, Void, Void>
+	private static class SetImageViewAsyncTask extends AsyncTask<Void, Void, Bitmap>
 	{
 		private ImageView imageView;
 		private AssetManager assetManager;
+		private String filename;
 
-		SetImageViewAsyncTask(ImageView imageView, AssetManager assetManager)
+		SetImageViewAsyncTask(ImageView imageView, AssetManager assetManager, String filename)
 		{
 			this.imageView = imageView;
 			this.assetManager = assetManager;
+			this.filename = filename;
 		}
 
+		/**
+		 * Runs asynchronously
+		 *
+		 * @param args Don't have any real args
+		 * @return The loaded image converted into a bitmap
+		 */
 		@Override
-		protected Void doInBackground(String... strings)
+		protected Bitmap doInBackground(Void... args)
 		{
-			for (String string : strings)
+			try (InputStream is = assetManager.open(filename))
 			{
-				try (InputStream is = assetManager.open(string))
-				{
-					Bitmap bitmap = BitmapFactory.decodeStream(is);
-					imageView.setImageBitmap(bitmap);
-				} catch (IOException e)
-				{
-					Log.e(ASSET_MISSING_TAG, "Error opening image file", e);
-				}
+				return BitmapFactory.decodeStream(is);
+			} catch (IOException e)
+			{
+				Log.e(ASSET_MISSING_TAG, "Error opening image file", e);
 			}
 
 			return null;
+		}
+
+		/**
+		 * We can now add the bitmap to our imageView in the UI thread
+		 *
+		 * @param bitmap The bitmap to add onto the image view
+		 */
+		@Override
+		protected void onPostExecute(Bitmap bitmap)
+		{
+			imageView.setImageBitmap(bitmap);
 		}
 	}
 }
