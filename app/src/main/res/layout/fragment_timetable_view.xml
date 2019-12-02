@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
     android:paddingStart="5dp"
     android:paddingEnd="5dp"
     android:scrollbars="vertical"
@@ -33,10 +32,10 @@
             android:id="@+id/session_view_set_favourite_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
             android:contentDescription="@string/session_view_favourite_button_text"
             android:src="@drawable/ic_favorite_border_black_24dp"
             android:tint="@color/primaryTextColor"
+            android:background="@null"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="1dp"
-            android:background="#363c41"
+            android:background="@color/divider"
             android:paddingTop="5dp"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +88,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/primaryLightColor"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/session_view_location" />
@@ -99,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:background="#363c41"
+            android:background="@color/divider"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/session_view_session_description" />
