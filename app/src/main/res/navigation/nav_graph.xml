@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_timetable">
         <action
             android:id="@+id/action_timetableFragment_to_timetableListFragment"
-            app:destination="@id/timetableListFragment" />
+            app:destination="@id/timetableListFragment"
+            app:popUpTo="@+id/timetableFragment" />
     </fragment>
 
     <fragment
@@ -22,7 +23,8 @@
         tools:layout="@layout/fragment_favourites">
         <action
             android:id="@+id/action_favouritesFragment_to_timetableListFragment"
-            app:destination="@id/timetableListFragment" />
+            app:destination="@id/timetableListFragment"
+            app:popUpTo="@+id/timetableFragment" />
     </fragment>
 
     <fragment
