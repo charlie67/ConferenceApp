@@ -13,4 +13,12 @@
         android:layout_marginBottom="?attr/actionBarSize"
         android:scrollbars="vertical" />
 
+    <TextView
+        style="@style/SessionTextView"
+        android:id="@+id/timetable_no_sessions_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_sessions"
+        android:layout_gravity="center" />
+
 </LinearLayout>
