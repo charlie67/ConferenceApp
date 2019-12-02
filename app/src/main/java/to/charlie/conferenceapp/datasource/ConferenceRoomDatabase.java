@@ -29,6 +29,7 @@ public abstract class ConferenceRoomDatabase extends RoomDatabase
 {
 	private static ConferenceRoomDatabase INSTANCE;
 	private static final String DB_NAME = "conf.db";
+	private static final String DATABASE_LOG_TAG = "DATABASE";
 
 	public abstract LocationDao getLocationDao();
 
@@ -44,7 +45,7 @@ public abstract class ConferenceRoomDatabase extends RoomDatabase
 			{
 				if (INSTANCE == null)
 				{
-					Log.i("Database", "Creating the database");
+					Log.i(DATABASE_LOG_TAG, "Creating the database");
 					INSTANCE = createDatabase(context);
 				}
 			}
