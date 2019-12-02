@@ -1,10 +1,5 @@
 package to.charlie.conferenceapp.espresso.favourite;
 
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.test.espresso.ViewAssertion;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -20,7 +15,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.assertEquals;
+import static to.charlie.conferenceapp.util.EspressoChecker.checkNoSessionTextIsCorrectAndVisible;
+import static to.charlie.conferenceapp.util.EspressoChecker.checkSessionTitleTextView;
 import static to.charlie.conferenceapp.util.EspressoMatcherUtil.withIndex;
 
 @RunWith(AndroidJUnit4.class)
@@ -42,7 +38,7 @@ public class CheckFavouriteTabDisplaysFavourites
 		onView(withId(R.id.session_view_set_favourite_button)).perform(click());
 
 		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
-		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkTextView("Using ARKit " +
+		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
 
 		//click on the timetable tab
@@ -54,9 +50,9 @@ public class CheckFavouriteTabDisplaysFavourites
 
 		//click on the favourites tab
 		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
-		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkTextView("Using ARKit " +
+		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
-		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkTextView("Welcome / " +
+		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkSessionTitleTextView("Welcome / " +
 						"Introduction"));
 
 		//click on the timetable tab
@@ -68,11 +64,11 @@ public class CheckFavouriteTabDisplaysFavourites
 
 		//click on the favourites tab
 		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
-		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkTextView("Using ARKit " +
+		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
-		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkTextView("Welcome / " +
+		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkSessionTitleTextView("Welcome / " +
 						"Introduction"));
-		onView(withIndex(withId(R.id.session_title_text_view), 2)).check(checkTextView("I'll tell you" +
+		onView(withIndex(withId(R.id.session_title_text_view), 2)).check(checkSessionTitleTextView("I'll tell you" +
 						" what you can do with Core ML"));
 
 		//click on the 1st session
@@ -82,9 +78,9 @@ public class CheckFavouriteTabDisplaysFavourites
 
 		//click on the favourites tab
 		onView(withIndex(withText(R.string.favourites_tab), 1)).perform(click());
-		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkTextView("Welcome / " +
+		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Welcome / " +
 						"Introduction"));
-		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkTextView("I'll tell you" +
+		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkSessionTitleTextView("I'll tell you" +
 						" what you can do with Core ML"));
 
 		//click on the 2nd session
@@ -94,7 +90,7 @@ public class CheckFavouriteTabDisplaysFavourites
 
 		//click on the favourites tab
 		onView(withIndex(withText(R.string.favourites_tab), 1)).perform(click());
-		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkTextView("I'll tell you" +
+		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("I'll tell you" +
 						" what you can do with Core ML"));
 
 		//now click on the last session
@@ -105,21 +101,6 @@ public class CheckFavouriteTabDisplaysFavourites
 		//click on the favourites tab
 		onView(withIndex(withText(R.string.favourites_tab), 1)).perform(click());
 		//check that the no session to display text is shown
-		onView(withText(R.string.no_sessions)).check((view, noViewFoundException) ->
-		{
-			TextView textView = view.findViewById(R.id.timetable_no_sessions_text);
-			assertEquals(textView.getText(), "There are no sessions to display.");
-			assertEquals(textView.getVisibility(), View.VISIBLE);
-		});
-	}
-
-	@NonNull
-	private ViewAssertion checkTextView(String textToCheck)
-	{
-		return (view, noViewFoundException) ->
-		{
-			TextView textView = view.findViewById(R.id.session_title_text_view);
-			assertEquals(textView.getText(), textToCheck);
-		};
+		onView(withText(R.string.no_sessions)).check(checkNoSessionTextIsCorrectAndVisible());
 	}
 }
