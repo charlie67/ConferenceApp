@@ -40,7 +40,5 @@ public class CheckFavouriteTabDisplayNoSessionToShowText
 			assertEquals(textView.getText(), "There are no sessions to display.");
 			assertEquals(textView.getVisibility(), View.VISIBLE);
 		});
-		System.out.println("");
 	}
-
 }
