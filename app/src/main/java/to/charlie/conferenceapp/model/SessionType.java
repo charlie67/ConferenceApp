@@ -1,5 +1,11 @@
 package to.charlie.conferenceapp.model;
 
+/**
+ * Session types.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public enum SessionType
 {
 	TALK("Talk"), WORKSHOP("Workshop"), COFFEE("Coffee"), LUNCH("Lunch"), DINNER("Dinnner"), REGISTRATION("Registration");
@@ -11,6 +17,11 @@ public enum SessionType
 		typeName = type;
 	}
 
+	/**
+	 * Get the human readable name for the session.
+	 *
+	 * @return The human readable name for the session.
+	 */
 	public String getTypeName()
 	{
 		return typeName;

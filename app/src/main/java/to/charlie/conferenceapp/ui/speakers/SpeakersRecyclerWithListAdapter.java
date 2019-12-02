@@ -24,11 +24,22 @@ import to.charlie.conferenceapp.ui.timetableList.NavigationType;
 import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.NAVIGATION_TYPE_BUNDLE_KEY;
 import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.SPEAKER_ID_BUNDLE_KEY;
 
+/**
+ * Recycler view to show the speaker information
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<SpeakersRecyclerWithListAdapter.ViewHolder>
 {
 	private List<Speaker> dataSet;
 
-	public class ViewHolder extends RecyclerView.ViewHolder
+	/**
+	 * Provides a reference to the views for each data item. Caches as much as possible.
+	 * Complex data items may need more than one view per item, and
+	 * you provide access to all the views for a data item in a view holder
+	 */
+	class ViewHolder extends RecyclerView.ViewHolder
 	{
 		ImageView speakerImage;
 		TextView speakerName;
@@ -47,6 +58,11 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 			this.speakerName = itemView.findViewById(R.id.speaker_list_speaker_name);
 		}
 
+		/**
+		 * This is where the view is bound to data within the data
+		 *
+		 * @param speaker The current data item
+		 */
 		void bindDataSet(Speaker speaker)
 		{
 			speakerName.setText(speaker.getName());
@@ -65,7 +81,14 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 		}
 	}
 
-
+	/**
+	 * Called by the RecyclerView asking for a ViewHolder object
+	 *
+	 * @param parent   The parent view (e.g. GridLayout)
+	 * @param viewType An id to identify the kind of view to inflate, e.g. where different
+	 *                 kinds of view are displayed for different items in the list: by default 0
+	 * @return The new ViewHolder object that will be cached by the RecyclerView
+	 */
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -76,6 +99,12 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 		return new ViewHolder(view);
 	}
 
+	/**
+	 * Replace the contents of a view
+	 *
+	 * @param holder   The current view being displayed
+	 * @param position The position of that view in the grid being displayed
+	 */
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position)
 	{

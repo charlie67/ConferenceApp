@@ -7,6 +7,13 @@ import android.view.ViewParent;
 
 import com.google.android.gms.maps.MapView;
 
+/**
+ * Extends the Google map view because when you have it in a scroll view you have problems.
+ * From https://stackoverflow.com/questions/6546108/mapview-inside-a-scrollview
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class CustomMapView extends MapView
 {
 

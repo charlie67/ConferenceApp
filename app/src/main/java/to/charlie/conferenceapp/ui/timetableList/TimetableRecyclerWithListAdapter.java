@@ -22,6 +22,12 @@ import java.util.Locale;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.Session;
 
+/**
+ * Recycler view to show a list of sessions
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<TimetableRecyclerWithListAdapter.ViewHolder>
 {
 	private List<Session> dataSet;

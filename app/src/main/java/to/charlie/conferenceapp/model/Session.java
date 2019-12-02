@@ -11,6 +11,12 @@ import java.security.InvalidParameterException;
 
 import to.charlie.conferenceapp.model.util.SessionTypeConverter;
 
+/**
+ * Defines a session
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 @Entity(tableName = "sessions")
 @TypeConverters({SessionTypeConverter.class})
 public class Session
@@ -37,6 +43,13 @@ public class Session
 
 	private static final String SESSION_FAVOURITE_BUNDLE_KEY = "SESSION_FAVOURITE";
 
+	/**
+	 * Extract the stored information from the bundle and create a session from it.
+	 *
+	 * @param bundle The bundle that contains the information to extract
+	 * @return A session object that holds the information contained in the bundle
+	 * @throws InvalidParameterException If the ID was not included in the bundle
+	 */
 	public static Session SessionFromBundle(Bundle bundle) throws InvalidParameterException
 	{
 		String id = bundle.getString(SESSION_ID_BUNDLE_KEY);
@@ -69,6 +82,11 @@ public class Session
 		this.favourite = favourite;
 	}
 
+	/**
+	 * Turn the information from this session into a bundle so it can be navigated between sessions
+	 *
+	 * @return A bundle that contains all the information from this session
+	 */
 	public Bundle toBundle()
 	{
 		Bundle bundle = new Bundle();

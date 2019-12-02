@@ -12,6 +12,13 @@ import java.util.List;
 import to.charlie.conferenceapp.datasource.ConferenceRepository;
 import to.charlie.conferenceapp.ui.timetableList.TimetableRecyclerWithListAdapter;
 
+/**
+ * Session view model. Holds UI data for sessions. This is used to display a list of sessions
+ * anywhere in the app that requires it.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class SessionListViewModel extends AndroidViewModel
 {
 	private LiveData<List<Session>> sessionList;
@@ -25,6 +32,13 @@ public class SessionListViewModel extends AndroidViewModel
 		repository = new ConferenceRepository(application);
 	}
 
+	/**
+	 * Set the search criteria for the sessions to display. This is used anywhere in the app that
+	 * requires a list of sessions and so needs to be able to know what sessions to find.
+	 *
+	 * @param favourites Should favourites be shown.
+	 * @param speakerId  The speaker ID to find for sessions. NULL if not to search by speaker
+	 */
 	public void setSearchCriteria(boolean favourites, String speakerId)
 	{
 		if (favourites)

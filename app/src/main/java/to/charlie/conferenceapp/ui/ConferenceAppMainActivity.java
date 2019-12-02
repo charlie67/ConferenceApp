@@ -13,6 +13,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import to.charlie.conferenceapp.R;
 
+/**
+ * Main activity, setting of the toolbar and setting up the navigation controller.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class ConferenceAppMainActivity extends AppCompatActivity
 {
 	@Override

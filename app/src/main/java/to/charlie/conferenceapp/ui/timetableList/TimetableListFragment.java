@@ -14,6 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
 
+/**
+ * Timetable list fragment. This fragment is navigated to from one of the main, timetable,
+ * favourites or speakers fragment. In the bundle that does the navigation a navigation type is
+ * provided.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class TimetableListFragment extends Fragment
 {
 	private TimetableRecyclerWithListAdapter sessionsRecyclerAdapter;
@@ -97,6 +105,7 @@ public class TimetableListFragment extends Fragment
 
 	private void checkSessionSize(View view, int size)
 	{
+		//check if the no sessions to show text should be removed.
 		if (size > 0)
 		{
 			TextView noSessionsText = view.findViewById(R.id.timetable_no_sessions_text);

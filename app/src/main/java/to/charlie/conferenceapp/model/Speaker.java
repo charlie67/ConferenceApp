@@ -4,6 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Defines a speaker.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 @Entity(tableName = "speakers")
 public class Speaker
 {

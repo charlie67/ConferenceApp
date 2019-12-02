@@ -13,6 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SpeakerListViewModel;
 
+/**
+ * The speakers fragment. Used to show the list of speakers.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class SpeakersFragment extends Fragment
 {
 	private SpeakersRecyclerWithListAdapter speakersRecyclerAdapter;

@@ -17,6 +17,12 @@ import to.charlie.conferenceapp.ui.timetableList.NavigationType;
 
 import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.NAVIGATION_TYPE_BUNDLE_KEY;
 
+/**
+ * The timetable fragment used to show the list of all sessions.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class TimetableFragment extends Fragment
 {
 	public TimetableFragment()
@@ -33,6 +39,7 @@ public class TimetableFragment extends Fragment
 						R.id.nav_host_fragment);
 
 		Bundle navigationBundle = new Bundle();
+		//navigate to the timetable list and tell it to show all the sessions
 		navigationBundle.putString(NAVIGATION_TYPE_BUNDLE_KEY, NavigationType.ALL.toString());
 		navController.navigate(R.id.action_timetableFragment_to_timetableListFragment, navigationBundle);
 

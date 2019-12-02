@@ -6,6 +6,12 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * Speaker DAO performs the CRUD operations for the speaker table.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 @Dao
 public interface SpeakerDao
 {

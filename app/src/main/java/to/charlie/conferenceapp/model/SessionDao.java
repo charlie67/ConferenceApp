@@ -12,6 +12,12 @@ import to.charlie.conferenceapp.model.util.SessionTypeConverter;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
+/**
+ * Session DAO. CRUD operations for the session table.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 @Dao
 @TypeConverters({SessionTypeConverter.class})
 public interface SessionDao

@@ -11,6 +11,12 @@ import java.util.List;
 import to.charlie.conferenceapp.datasource.ConferenceRepository;
 import to.charlie.conferenceapp.ui.speakers.SpeakersRecyclerWithListAdapter;
 
+/**
+ * Speaker list view model. Holds all the information for the speaker list view.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class SpeakerListViewModel extends AndroidViewModel
 {
 	private SpeakersRecyclerWithListAdapter adapter;

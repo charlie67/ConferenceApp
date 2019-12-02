@@ -37,6 +37,12 @@ import to.charlie.conferenceapp.model.util.ResourceUtil;
 
 import static androidx.core.util.Preconditions.checkArgument;
 
+/**
+ * Fragment to show a single session item.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 public class TimetableItemFragment extends Fragment implements OnMapReadyCallback
 {
 	private SessionViewModel sessionViewModel;
@@ -165,6 +171,7 @@ public class TimetableItemFragment extends Fragment implements OnMapReadyCallbac
 	String getDayOfMonthSuffix(final int n)
 	{
 		//check if the day of the month is at most 31 and at least 1
+		//this will throw an exception if the argument is not met
 		checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
 		//11th 12th and 13th
 		if (n >= 11 && n <= 13)
@@ -213,6 +220,8 @@ public class TimetableItemFragment extends Fragment implements OnMapReadyCallbac
 	@Override
 	public void onMapReady(GoogleMap googleMap)
 	{
+		//called when the map is loaded.
+		//set the location of the pin on the map and move the camera to show it
 		LatLng locationMarker = new LatLng(location.getLatitude(), location.getLongitude());
 		googleMap.addMarker(new MarkerOptions().position(locationMarker).title(location.getName()));
 		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMarker, 15.0f));
