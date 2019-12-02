@@ -3,12 +3,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favourites.FavouritesFragment">
-
-    <fragment
-        android:id="@+id/timetable_fragment_list"
-        android:name="to.charlie.conferenceapp.ui.timetableList.TimetableListFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</FrameLayout>
+    tools:context=".ui.favourites.FavouritesFragment" />
