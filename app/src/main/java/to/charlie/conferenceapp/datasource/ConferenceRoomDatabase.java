@@ -3,6 +3,7 @@ package to.charlie.conferenceapp.datasource;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -18,7 +19,7 @@ import to.charlie.conferenceapp.model.Speaker;
 import to.charlie.conferenceapp.model.SpeakerDao;
 
 /**
- * The Room database and initialisation class
+ * The Room database and initialisation class.
  *
  * @author Charlie Robinson
  * @version 2/12/19
@@ -35,7 +36,7 @@ public abstract class ConferenceRoomDatabase extends RoomDatabase
 
 	public abstract SpeakerDao getSpeakerDao();
 
-	public static ConferenceRoomDatabase getDatabase(final Context context)
+	static ConferenceRoomDatabase getDatabase(final Context context)
 	{
 		if (INSTANCE == null)
 		{
@@ -67,7 +68,7 @@ public abstract class ConferenceRoomDatabase extends RoomDatabase
 	private static final Migration MIGRATION_1_2 = new Migration(1, 2)
 	{
 		@Override
-		public void migrate(SupportSQLiteDatabase database)
+		public void migrate(@NonNull SupportSQLiteDatabase database)
 		{
 			//No migration is needed this is just here so the DB copies over
 		}
