@@ -17,6 +17,12 @@ import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.model.Speaker;
 import to.charlie.conferenceapp.model.SpeakerDao;
 
+/**
+ * The Room database and initialisation class
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19
+ */
 @Database(entities = {Location.class, Session.class, Speaker.class}, version = 2)
 public abstract class ConferenceRoomDatabase extends RoomDatabase
 {

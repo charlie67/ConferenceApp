@@ -14,6 +14,13 @@ import to.charlie.conferenceapp.model.SessionDao;
 import to.charlie.conferenceapp.model.Speaker;
 import to.charlie.conferenceapp.model.SpeakerDao;
 
+/**
+ * Conference repository. Recommended that we have an abstraction layer between
+ * UI ViewModels and the data source: relational database or network.
+ *
+ * @author Charlie Robinson
+ * @version 2/12/19.
+ */
 public class ConferenceRepository
 {
 	private LocationDao locationDao;
