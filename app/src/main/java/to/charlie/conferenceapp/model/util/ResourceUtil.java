@@ -12,10 +12,13 @@ import java.io.InputStream;
 
 public class ResourceUtil
 {
+	/**
+	 * Log tag to identify a call to the logs where an image failed to load
+	 */
 	private static final String ASSET_MISSING_TAG = "ASSET_MISSING";
 
-	public static void setImageOnImageView(ImageView imageView, String fileName,
-																				 AssetManager assetManager)
+	static void setImageOnImageView(ImageView imageView, String fileName,
+																	AssetManager assetManager)
 	{
 		try (InputStream is = assetManager.open("images/" + fileName + ".jpg"))
 		{
@@ -27,6 +30,15 @@ public class ResourceUtil
 		}
 	}
 
+	/**
+	 * loads the image at filename and sets that onto the provided ImageView. The fetching of the
+	 * image is done asynchronously.
+	 *
+	 * @param imageView    The image to update
+	 * @param fileName     The pathname to the image
+	 * @param assetManager The asset manager that should be used to load the image. Comes from the
+	 *                     context
+	 */
 	public static void setImageOnImageViewAsync(ImageView imageView, String fileName, AssetManager assetManager)
 	{
 		new SetImageViewAsyncTask(imageView, assetManager, fileName).execute();
