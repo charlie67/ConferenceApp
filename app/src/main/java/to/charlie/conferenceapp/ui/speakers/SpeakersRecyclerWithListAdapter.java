@@ -1,6 +1,7 @@
 package to.charlie.conferenceapp.ui.speakers;
 
 import android.content.res.AssetManager;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -25,12 +29,15 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 		ImageView speakerImage;
 		TextView speakerName;
 
+		View itemView;
+
 		AssetManager assetManger;
 
 		ViewHolder(View itemView)
 		{
 			super(itemView);
 			assetManger = itemView.getResources().getAssets();
+			this.itemView = itemView;
 
 			this.speakerImage = itemView.findViewById(R.id.speaker_list_speaker_image);
 			this.speakerName = itemView.findViewById(R.id.speaker_list_speaker_name);
@@ -41,6 +48,14 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 			speakerName.setText(speaker.getName());
 
 			ResourceUtil.setImageOnImageView(speakerImage, speaker.getId().trim(), assetManger);
+
+			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
+
+
+			Bundle navigationBundle = new Bundle();
+			navigationBundle.putString("SPEAKER_ID", speaker.getId());
+
+			itemView.setOnClickListener(v -> navController.navigate(R.id.action_speakersFragment_to_speakerSessionListFragment, navigationBundle));
 		}
 	}
 

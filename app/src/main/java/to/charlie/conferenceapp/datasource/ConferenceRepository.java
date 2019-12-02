@@ -44,6 +44,11 @@ public class ConferenceRepository
 		return sessionDao.getAllFavouriteSessions();
 	}
 
+	public LiveData<List<Session>> getAllSessionsWhereSpeakerHasId(String speakerId)
+	{
+		return sessionDao.getAllSessionsWhereSpeakerHasId(speakerId);
+	}
+
 	public LiveData<List<Speaker>> getAllSpeakers()
 	{
 		return speakerDao.getAllSpeakers();

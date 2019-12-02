@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.favourites;
+package to.charlie.conferenceapp.ui.speakers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,13 +14,13 @@ import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
 import to.charlie.conferenceapp.ui.sessionList.SessionsRecyclerWithListAdapter;
 
-public class FavouritesFragment extends Fragment
+public class SpeakerSessionListFragment extends Fragment
 {
 	private SessionsRecyclerWithListAdapter sessionsRecyclerAdapter;
 
-	public FavouritesFragment()
+	public SpeakerSessionListFragment()
 	{
-		// Required empty public constructor
+		//required empty public constructor
 	}
 
 	@Override
@@ -30,9 +30,8 @@ public class FavouritesFragment extends Fragment
 		final View view = inflater.inflate(R.layout.fragment_sessions, container, false);
 
 		SessionListViewModel sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
-		//tell the view model that this is being used for the favourites list, when this is called it
-		// will search for all the favourite sessions
-		sessionListViewModel.setSearchCriteria(true, null);
+
+		sessionListViewModel.setSearchCriteria(false, getArguments().getString("SPEAKER_ID"));
 		sessionsRecyclerAdapter = sessionListViewModel.getAdapter();
 		if (sessionsRecyclerAdapter == null)
 		{
@@ -40,8 +39,8 @@ public class FavouritesFragment extends Fragment
 			sessionListViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}
-		//tell the recycler view that it is being used for the favourites fragment
-		sessionsRecyclerAdapter.setListDisplayType(true, false);
+		//tell the recycler view that it is being used for the speakers list fragment
+		sessionsRecyclerAdapter.setListDisplayType(false, true);
 
 		RecyclerView listSessions = view.findViewById(R.id.session_list);
 		listSessions.setLayoutManager(new LinearLayoutManager(getContext()));

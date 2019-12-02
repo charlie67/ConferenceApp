@@ -26,6 +26,7 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 {
 	private List<Session> dataSet;
 	private boolean favouritesList = false;
+	private boolean speakersList = false;
 
 	/**
 	 * Called by the RecyclerView asking for a ViewHolder object
@@ -90,13 +91,14 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	}
 
 	/**
-	 * Set that this recycler view is being used for the favourites list
+	 * Set that this recycler view is being used for the favourites list or the speakers list
 	 *
 	 * @param favouritesList true if this is being used to show the favourites list otherwise false
 	 */
-	public void setFavouritesList(boolean favouritesList)
+	public void setListDisplayType(boolean favouritesList, boolean speakersList)
 	{
 		this.favouritesList = favouritesList;
+		this.speakersList = speakersList;
 	}
 
 	/**
@@ -142,6 +144,10 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 			if (favouritesList)
 			{
 				itemView.setOnClickListener(v -> navController.navigate(R.id.action_favourites_fragment_to_session_item_view, session.toBundle()));
+			}
+			else if (speakersList)
+			{
+				itemView.setOnClickListener(v -> navController.navigate(R.id.action_speakerSessionListFragment_to_sessionItemFragment, session.toBundle()));
 			}
 			else
 			{

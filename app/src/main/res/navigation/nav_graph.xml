@@ -31,11 +31,25 @@
         android:id="@+id/speakersFragment"
         android:name="to.charlie.conferenceapp.ui.speakers.SpeakersFragment"
         android:label="fragment_speakers"
-        tools:layout="@layout/fragment_speakers" />
+        tools:layout="@layout/fragment_speakers">
+        <action
+            android:id="@+id/action_speakersFragment_to_speakerSessionListFragment"
+            app:destination="@id/speakerSessionListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/sessionItemFragment"
         android:name="to.charlie.conferenceapp.ui.sessions.SessionItemFragment"
         android:label="fragment_session_item"
         tools:layout="@layout/fragment_session_item" />
+
+    <fragment
+        android:id="@+id/speakerSessionListFragment"
+        android:name="to.charlie.conferenceapp.ui.speakers.SpeakerSessionListFragment"
+        android:label="fragment_speaker_session_list"
+        tools:layout="@layout/fragment_speaker_session_list">
+        <action
+            android:id="@+id/action_speakerSessionListFragment_to_sessionItemFragment"
+            app:destination="@id/sessionItemFragment" />
+    </fragment>
 </navigation>
