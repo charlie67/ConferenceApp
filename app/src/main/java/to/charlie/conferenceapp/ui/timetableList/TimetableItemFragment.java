@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.sessions;
+package to.charlie.conferenceapp.ui.timetableList;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -38,7 +38,7 @@ import to.charlie.conferenceapp.model.util.ResourceUtil;
 
 import static androidx.core.util.Preconditions.checkArgument;
 
-public class SessionItemFragment extends Fragment implements OnMapReadyCallback
+public class TimetableItemFragment extends Fragment implements OnMapReadyCallback
 {
 	private SessionViewModel sessionViewModel;
 
@@ -62,7 +62,7 @@ public class SessionItemFragment extends Fragment implements OnMapReadyCallback
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		final View view = inflater.inflate(R.layout.fragment_session_item, container, false);
+		final View view = inflater.inflate(R.layout.fragment_timetable_view, container, false);
 		sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
 
 		TextView sessionTitle = view.findViewById(R.id.session_view_title);

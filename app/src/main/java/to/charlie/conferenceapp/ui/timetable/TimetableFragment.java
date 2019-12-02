@@ -1,10 +1,12 @@
-package to.charlie.conferenceapp.ui.favourites;
+package to.charlie.conferenceapp.ui.timetable;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
@@ -15,25 +17,24 @@ import to.charlie.conferenceapp.ui.timetableList.NavigationType;
 
 import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.NAVIGATION_TYPE_BUNDLE_KEY;
 
-public class FavouritesFragment extends Fragment
+public class TimetableFragment extends Fragment
 {
-	public FavouritesFragment()
+	public TimetableFragment()
 	{
 		// Required empty public constructor
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_favourites, container, false);
+		View view = inflater.inflate(R.layout.fragment_timetable, container, false);
 
 		final NavController navController = Navigation.findNavController((FragmentActivity) view.getContext(),
 						R.id.nav_host_fragment);
 
 		Bundle navigationBundle = new Bundle();
-		navigationBundle.putString(NAVIGATION_TYPE_BUNDLE_KEY, NavigationType.FAVOURITES.toString());
-		navController.navigate(R.id.action_favouritesFragment_to_timetableListFragment, navigationBundle);
+		navigationBundle.putString(NAVIGATION_TYPE_BUNDLE_KEY, NavigationType.ALL.toString());
+		navController.navigate(R.id.action_timetableFragment_to_timetableListFragment, navigationBundle);
 
 		return view;
 	}

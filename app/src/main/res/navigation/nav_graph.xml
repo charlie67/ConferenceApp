@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sessionsFragment">
+    app:startDestination="@id/timetableFragment">
 
     <fragment
-        android:id="@+id/sessionsFragment"
-        android:name="to.charlie.conferenceapp.ui.sessions.SessionsFragment"
+        android:id="@+id/timetableFragment"
+        android:name="to.charlie.conferenceapp.ui.timetable.TimetableFragment"
         android:label="fragment_sessions"
-        tools:layout="@layout/fragment_sessions">
+        tools:layout="@layout/fragment_timetable">
         <action
-            android:id="@+id/action_session_fragment_to_session_item_view"
-            app:destination="@+id/sessionItemFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            android:id="@+id/action_timetableFragment_to_timetableListFragment"
+            app:destination="@id/timetableListFragment" />
     </fragment>
 
     <fragment
@@ -22,9 +21,8 @@
         android:label="fragment_favourites"
         tools:layout="@layout/fragment_favourites">
         <action
-            android:id="@+id/action_favourites_fragment_to_session_item_view"
-            app:destination="@+id/sessionItemFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            android:id="@+id/action_favouritesFragment_to_timetableListFragment"
+            app:destination="@id/timetableListFragment" />
     </fragment>
 
     <fragment
@@ -33,23 +31,24 @@
         android:label="fragment_speakers"
         tools:layout="@layout/fragment_speakers">
         <action
-            android:id="@+id/action_speakersFragment_to_speakerSessionListFragment"
-            app:destination="@id/speakerSessionListFragment" />
+            android:id="@+id/action_speakersFragment_to_timetableListFragment"
+            app:destination="@id/timetableListFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/sessionItemFragment"
-        android:name="to.charlie.conferenceapp.ui.sessions.SessionItemFragment"
+        android:id="@+id/timetableItemFragment"
+        android:name="to.charlie.conferenceapp.ui.timetableList.TimetableItemFragment"
         android:label="fragment_session_item"
-        tools:layout="@layout/fragment_session_item" />
+        tools:layout="@layout/fragment_timetable_view" />
 
     <fragment
-        android:id="@+id/speakerSessionListFragment"
-        android:name="to.charlie.conferenceapp.ui.speakers.SpeakerSessionListFragment"
-        android:label="fragment_speaker_session_list"
-        tools:layout="@layout/fragment_speaker_session_list">
+        android:id="@+id/timetableListFragment"
+        android:name="to.charlie.conferenceapp.ui.timetableList.TimetableListFragment"
+        android:label="fragment_session_list"
+        tools:layout="@layout/fragment_timetable_list">
         <action
-            android:id="@+id/action_speakerSessionListFragment_to_sessionItemFragment"
-            app:destination="@id/sessionItemFragment" />
+            android:id="@+id/action_timetableListFragment_to_timetableItemFragment"
+            app:destination="@id/timetableItemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
 </navigation>

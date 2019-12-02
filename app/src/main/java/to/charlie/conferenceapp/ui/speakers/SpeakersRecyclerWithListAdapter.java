@@ -19,6 +19,10 @@ import java.util.List;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.Speaker;
 import to.charlie.conferenceapp.model.util.ResourceUtil;
+import to.charlie.conferenceapp.ui.timetableList.NavigationType;
+
+import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.NAVIGATION_TYPE_BUNDLE_KEY;
+import static to.charlie.conferenceapp.ui.timetableList.TimetableListFragment.SPEAKER_ID_BUNDLE_KEY;
 
 public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<SpeakersRecyclerWithListAdapter.ViewHolder>
 {
@@ -53,9 +57,11 @@ public class SpeakersRecyclerWithListAdapter extends RecyclerView.Adapter<Speake
 
 
 			Bundle navigationBundle = new Bundle();
-			navigationBundle.putString("SPEAKER_ID", speaker.getId());
+			navigationBundle.putString(SPEAKER_ID_BUNDLE_KEY, speaker.getId());
+			navigationBundle.putString(NAVIGATION_TYPE_BUNDLE_KEY, NavigationType.SPEAKER.toString());
 
-			itemView.setOnClickListener(v -> navController.navigate(R.id.action_speakersFragment_to_speakerSessionListFragment, navigationBundle));
+			itemView.setOnClickListener(v -> navController.navigate(R.id.action_speakersFragment_to_timetableListFragment,
+							navigationBundle));
 		}
 	}
 

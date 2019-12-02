@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.sessions;
+package to.charlie.conferenceapp.ui.timetableList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,13 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
-import to.charlie.conferenceapp.ui.sessionList.SessionsRecyclerWithListAdapter;
 
-public class SessionsFragment extends Fragment
+public class TimetableListFragment extends Fragment
 {
-	private SessionsRecyclerWithListAdapter sessionsRecyclerAdapter;
+	private TimetableRecyclerWithListAdapter sessionsRecyclerAdapter;
 
-	public SessionsFragment()
+	public static String NAVIGATION_TYPE_BUNDLE_KEY = "NAVIGATION_TYPE";
+	public static String SPEAKER_ID_BUNDLE_KEY = "SPEAKER_ID";
+
+	public TimetableListFragment()
 	{
 		// Required empty public constructor
 	}
@@ -27,13 +29,42 @@ public class SessionsFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		final View view = inflater.inflate(R.layout.fragment_sessions, container, false);
+		final View view = inflater.inflate(R.layout.fragment_timetable_list, container, false);
 
 		SessionListViewModel sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
+
+		NavigationType navigationType;
+		if (getArguments() == null)
+		{
+			navigationType = NavigationType.ALL;
+		}
+		else
+		{
+			String navigationTypeString = getArguments().getString(NAVIGATION_TYPE_BUNDLE_KEY);
+
+			navigationType = NavigationType.valueOf(navigationTypeString.toUpperCase());
+		}
+
+		switch (navigationType)
+		{
+			case SPEAKER:
+				String speakerId = getArguments().getString(SPEAKER_ID_BUNDLE_KEY);
+				sessionListViewModel.setSearchCriteria(false, speakerId);
+				break;
+
+			case FAVOURITES:
+				sessionListViewModel.setSearchCriteria(true, null);
+				break;
+
+			case ALL:
+				sessionListViewModel.setSearchCriteria(false, null);
+				break;
+		}
+
 		sessionsRecyclerAdapter = sessionListViewModel.getAdapter();
 		if (sessionsRecyclerAdapter == null)
 		{
-			sessionsRecyclerAdapter = new SessionsRecyclerWithListAdapter();
+			sessionsRecyclerAdapter = new TimetableRecyclerWithListAdapter();
 			sessionListViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}

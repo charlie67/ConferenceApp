@@ -1,4 +1,4 @@
-package to.charlie.conferenceapp.ui.sessionList;
+package to.charlie.conferenceapp.ui.timetableList;
 
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -22,11 +22,9 @@ import java.util.Locale;
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.Session;
 
-public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<SessionsRecyclerWithListAdapter.ViewHolder>
+public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<TimetableRecyclerWithListAdapter.ViewHolder>
 {
 	private List<Session> dataSet;
-	private boolean favouritesList = false;
-	private boolean speakersList = false;
 
 	/**
 	 * Called by the RecyclerView asking for a ViewHolder object
@@ -91,17 +89,6 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 	}
 
 	/**
-	 * Set that this recycler view is being used for the favourites list or the speakers list
-	 *
-	 * @param favouritesList true if this is being used to show the favourites list otherwise false
-	 */
-	public void setListDisplayType(boolean favouritesList, boolean speakersList)
-	{
-		this.favouritesList = favouritesList;
-		this.speakersList = speakersList;
-	}
-
-	/**
 	 * Provides a reference to the views for each data item. Caches as much as possible.
 	 * Complex data items may need more than one view per item, and
 	 * you provide access to all the views for a data item in a view holder
@@ -141,18 +128,8 @@ public class SessionsRecyclerWithListAdapter extends RecyclerView.Adapter<Sessio
 		{
 			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
 
-			if (favouritesList)
-			{
-				itemView.setOnClickListener(v -> navController.navigate(R.id.action_favourites_fragment_to_session_item_view, session.toBundle()));
-			}
-			else if (speakersList)
-			{
-				itemView.setOnClickListener(v -> navController.navigate(R.id.action_speakerSessionListFragment_to_sessionItemFragment, session.toBundle()));
-			}
-			else
-			{
-				itemView.setOnClickListener(v -> navController.navigate(R.id.action_session_fragment_to_session_item_view, session.toBundle()));
-			}
+			itemView.setOnClickListener(v -> navController.navigate(R.id.action_timetableListFragment_to_timetableItemFragment, session.toBundle()));
+
 
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);

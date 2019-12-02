@@ -10,32 +10,22 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import to.charlie.conferenceapp.datasource.ConferenceRepository;
-import to.charlie.conferenceapp.ui.sessionList.SessionsRecyclerWithListAdapter;
+import to.charlie.conferenceapp.ui.timetableList.TimetableRecyclerWithListAdapter;
 
 public class SessionListViewModel extends AndroidViewModel
 {
 	private LiveData<List<Session>> sessionList;
-	private SessionsRecyclerWithListAdapter adapter;
+	private TimetableRecyclerWithListAdapter adapter;
 	private ConferenceRepository repository;
-
-	/**
-	 * This model is used for both the session list and the favourites list, this variable is set
-	 * to true when this is being used for the favourites list
-	 */
-	private boolean favourites;
-
-	private String speakerId;
 
 	public SessionListViewModel(@NonNull Application application)
 	{
 		super(application);
 
 		repository = new ConferenceRepository(application);
-
-		searchForSessions();
 	}
 
-	private void searchForSessions()
+	public void setSearchCriteria(boolean favourites, String speakerId)
 	{
 		if (favourites)
 		{
@@ -51,24 +41,17 @@ public class SessionListViewModel extends AndroidViewModel
 		}
 	}
 
-	public void setSearchCriteria(boolean favourites, String speakerId)
-	{
-		this.favourites = favourites;
-		this.speakerId = speakerId;
-		searchForSessions();
-	}
-
 	public LiveData<List<Session>> getSessionList()
 	{
 		return sessionList;
 	}
 
-	public SessionsRecyclerWithListAdapter getAdapter()
+	public TimetableRecyclerWithListAdapter getAdapter()
 	{
 		return adapter;
 	}
 
-	public void setAdapter(SessionsRecyclerWithListAdapter adapter)
+	public void setAdapter(TimetableRecyclerWithListAdapter adapter)
 	{
 		this.adapter = adapter;
 	}
