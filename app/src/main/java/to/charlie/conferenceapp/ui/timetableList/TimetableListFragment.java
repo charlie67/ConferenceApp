@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -16,6 +17,7 @@ import to.charlie.conferenceapp.model.SessionListViewModel;
 public class TimetableListFragment extends Fragment
 {
 	private TimetableRecyclerWithListAdapter sessionsRecyclerAdapter;
+	private SessionListViewModel sessionListViewModel;
 
 	public static String NAVIGATION_TYPE_BUNDLE_KEY = "NAVIGATION_TYPE";
 	public static String SPEAKER_ID_BUNDLE_KEY = "SPEAKER_ID";
@@ -26,12 +28,19 @@ public class TimetableListFragment extends Fragment
 	}
 
 	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		sessionListViewModel.setAdapter(null);
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
 		final View view = inflater.inflate(R.layout.fragment_timetable_list, container, false);
 
-		SessionListViewModel sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
+		sessionListViewModel = ViewModelProviders.of(this).get(SessionListViewModel.class);
 
 		NavigationType navigationType;
 		if (getArguments() == null)
@@ -65,14 +74,33 @@ public class TimetableListFragment extends Fragment
 		if (sessionsRecyclerAdapter == null)
 		{
 			sessionsRecyclerAdapter = new TimetableRecyclerWithListAdapter();
-			sessionListViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
+			sessionListViewModel.getSessionList().observe(this,
+							sessions ->
+							{
+								sessionsRecyclerAdapter.changeDataSet(sessions);
+								//if there are sessions then remove the no sessions to show text
+								checkSessionSize(view, sessions.size());
+							});
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}
+
+		//if there are sessions then remove the no sessions to show text
+		//this is needed here as well because this n
+		checkSessionSize(view, sessionsRecyclerAdapter.getItemCount());
 
 		RecyclerView listSessions = view.findViewById(R.id.session_list);
 		listSessions.setLayoutManager(new LinearLayoutManager(getContext()));
 		listSessions.setAdapter(sessionsRecyclerAdapter);
 
 		return view;
+	}
+
+	private void checkSessionSize(View view, int size)
+	{
+		if (size > 0)
+		{
+			TextView noSessionsText = view.findViewById(R.id.timetable_no_sessions_text);
+			noSessionsText.setVisibility(View.GONE);
+		}
 	}
 }
