@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primaryColor"
     android:columnCount="2"
     android:rowCount="3">
 
