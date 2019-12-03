@@ -17,4 +17,5 @@
     <string name="session_view_favourite_button_text">Set session as favourite.</string>
     <string name="speaker_list_speaker_image_content_description">Image of the speaker</string>
     <string name="no_sessions">There are no sessions to display.</string>
+    <string name="nav_search">Search</string>
 </resources>

@@ -31,9 +31,15 @@ public interface SessionDao
 	@Query("SELECT * FROM sessions")
 	LiveData<List<Session>> getAllSessions();
 
-	@Query("SELECT * FROM sessions where speakerId = :speakerId")
+	@Query("SELECT * FROM sessions WHERE id = :id")
+	LiveData<List<Session>> getSessionWithId(String id);
+
+	@Query("SELECT * FROM sessions WHERE speakerId = :speakerId")
 	LiveData<List<Session>> getAllSessionsWhereSpeakerHasId(String speakerId);
 
-	@Query("SELECT * FROM sessions where favourite = 1")
+	@Query("SELECT * FROM sessions WHERE favourite = 1")
 	LiveData<List<Session>> getAllFavouriteSessions();
+
+	@Query("SELECT * FROM sessions WHERE title LIKE :query")
+	LiveData<List<Session>> searchForSessionWithTitle(String query);
 }

@@ -46,9 +46,19 @@ public class ConferenceRepository
 		return sessionDao.getAllSessions();
 	}
 
+	public LiveData<List<Session>> searchForSessionWithTitle(String query)
+	{
+		return sessionDao.searchForSessionWithTitle("%" + query + "%");
+	}
+
 	public LiveData<List<Session>> getAllFavouriteSessions()
 	{
 		return sessionDao.getAllFavouriteSessions();
+	}
+
+	public LiveData<List<Session>> getSessionWithId(String id)
+	{
+		return sessionDao.getSessionWithId(id);
 	}
 
 	public LiveData<List<Session>> getAllSessionsWhereSpeakerHasId(String speakerId)

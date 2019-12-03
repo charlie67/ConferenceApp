@@ -1,6 +1,7 @@
 package to.charlie.conferenceapp.ui.timetableList;
 
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import to.charlie.conferenceapp.model.Session;
 public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<TimetableRecyclerWithListAdapter.ViewHolder>
 {
 	private List<Session> dataSet;
+	private boolean usedForSearch = false;
 
 	/**
 	 * Called by the RecyclerView asking for a ViewHolder object
@@ -90,8 +92,14 @@ public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<Timet
 	 */
 	public void changeDataSet(List<Session> dataSet)
 	{
+		Log.i("TEST", "dataset changed");
 		this.dataSet = dataSet;
 		notifyDataSetChanged();
+	}
+
+	public void setUsedForSearch(boolean usedForSearch)
+	{
+		this.usedForSearch = usedForSearch;
 	}
 
 	/**
@@ -134,8 +142,14 @@ public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<Timet
 		{
 			final NavController navController = Navigation.findNavController((FragmentActivity) itemView.getContext(), R.id.nav_host_fragment);
 
-			itemView.setOnClickListener(v -> navController.navigate(R.id.action_timetableListFragment_to_timetableItemFragment, session.toBundle()));
-
+			if (usedForSearch)
+			{
+				itemView.setOnClickListener(v -> navController.navigate(R.id.action_searchFragment_to_timetableItemFragment, session.toBundle()));
+			}
+			else
+			{
+				itemView.setOnClickListener(v -> navController.navigate(R.id.action_timetableListFragment_to_timetableItemFragment, session.toBundle()));
+			}
 
 			String dayOfWeek = LocalDate.parse(session.getSessionDate()).getDayOfWeek().getDisplayName(TextStyle.FULL, currentLocale);
 			sessionDay.setText(dayOfWeek);

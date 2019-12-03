@@ -2,6 +2,7 @@ package to.charlie.conferenceapp.model;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -36,10 +37,12 @@ public class SessionListViewModel extends AndroidViewModel
 	 * Set the search criteria for the sessions to display. This is used anywhere in the app that
 	 * requires a list of sessions and so needs to be able to know what sessions to find.
 	 *
-	 * @param favourites Should favourites be shown.
-	 * @param speakerId  The speaker ID to find for sessions. NULL if not to search by speaker
+	 * @param favourites     Should favourites be shown.
+	 * @param speakerId      The speaker ID to find for sessions. NULL if not to search by speaker
+	 * @param searchCriteria The search criteria that the title should contain
 	 */
-	public void setSearchCriteria(boolean favourites, String speakerId)
+	public void setSearchCriteria(boolean favourites, String speakerId, String searchCriteria,
+																boolean emptySearch)
 	{
 		if (favourites)
 		{
@@ -48,6 +51,15 @@ public class SessionListViewModel extends AndroidViewModel
 		else if (!TextUtils.isEmpty(speakerId))
 		{
 			sessionList = repository.getAllSessionsWhereSpeakerHasId(speakerId);
+		}
+		else if (!TextUtils.isEmpty(searchCriteria))
+		{
+			Log.i("TEST", "new session list search for");
+			sessionList = repository.searchForSessionWithTitle(searchCriteria);
+		}
+		else if (emptySearch)
+		{
+			sessionList = repository.getSessionWithId(null);
 		}
 		else
 		{

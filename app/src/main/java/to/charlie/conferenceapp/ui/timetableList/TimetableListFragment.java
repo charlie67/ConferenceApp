@@ -66,15 +66,15 @@ public class TimetableListFragment extends Fragment
 		{
 			case SPEAKER:
 				String speakerId = getArguments().getString(SPEAKER_ID_BUNDLE_KEY);
-				sessionListViewModel.setSearchCriteria(false, speakerId);
+				sessionListViewModel.setSearchCriteria(false, speakerId, null, false);
 				break;
 
 			case FAVOURITES:
-				sessionListViewModel.setSearchCriteria(true, null);
+				sessionListViewModel.setSearchCriteria(true, null, null, false);
 				break;
 
 			case ALL:
-				sessionListViewModel.setSearchCriteria(false, null);
+				sessionListViewModel.setSearchCriteria(false, null, null, false);
 				break;
 		}
 

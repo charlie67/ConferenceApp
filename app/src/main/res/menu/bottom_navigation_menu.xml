@@ -13,4 +13,9 @@
         android:id="@+id/speakersFragment"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/nav_speakers" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/nav_search" />
 </menu>
