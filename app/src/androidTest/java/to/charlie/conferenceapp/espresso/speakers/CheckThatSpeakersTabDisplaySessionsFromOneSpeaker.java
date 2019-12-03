@@ -45,7 +45,7 @@ public class CheckThatSpeakersTabDisplaySessionsFromOneSpeaker
 		{
 			TextView textView = view.findViewById(R.id.session_view_speaker_name);
 
-			assertEquals(textView.getText(), "Speaker: Adam Rush");
+			assertEquals(textView.getText(), "Adam Rush @adam9rush");
 		});
 	}
 }
