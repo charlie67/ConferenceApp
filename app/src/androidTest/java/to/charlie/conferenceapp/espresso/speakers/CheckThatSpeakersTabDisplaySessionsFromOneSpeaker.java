@@ -19,7 +19,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 import static to.charlie.conferenceapp.util.EspressoChecker.checkSessionTitleTextView;
-import static to.charlie.conferenceapp.util.EspressoMatcherUtil.withIndex;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -33,7 +32,7 @@ public class CheckThatSpeakersTabDisplaySessionsFromOneSpeaker
 	public void clickingOnSpeakerShowsSessionsForThatSpeakerOnly()
 	{
 		//click on the speakers tab
-		onView(withIndex(withText(R.string.speakers_tab), 0)).perform(click());
+		onView(withId(R.id.speakersFragment)).perform(click());
 
 		onView(withText("Adam Rush")).perform(click());
 		onView(withId(R.id.session_title_text_view)).check(checkSessionTitleTextView("Continuous " +

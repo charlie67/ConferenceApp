@@ -31,39 +31,39 @@ public class CheckFavouriteTabDisplaysFavourites
 	public void seeThatSessionsMarkedAsFavouriteAreShownInFavouriteTab()
 	{
 		//click on the timetable tab
-		onView(withIndex(withText(R.string.timetable_tab), 1)).perform(click());
+		onView(withId(R.id.timetableFragment)).perform(click());
 		//now click on the session
 		onView(withText("Using ARKit with SpriteKit")).perform(click());
 		//set the session as a favourite
 		onView(withId(R.id.session_view_set_favourite_button)).perform(click());
 
-		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
+		onView(withId(R.id.favouritesFragment)).perform(click());
 		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
 
 		//click on the timetable tab
-		onView(withIndex(withText(R.string.timetable_tab), 0)).perform(click());
+		onView(withId(R.id.timetableFragment)).perform(click());
 		//now click on the session
 		onView(withText("Welcome / Introduction")).perform(click());
 		//set the session as a favourite
 		onView(withId(R.id.session_view_set_favourite_button)).perform(click());
 
 		//click on the favourites tab
-		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
+		onView(withId(R.id.favouritesFragment)).perform(click());
 		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
 		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkSessionTitleTextView("Welcome / " +
 						"Introduction"));
 
 		//click on the timetable tab
-		onView(withIndex(withText(R.string.timetable_tab), 0)).perform(click());
+		onView(withId(R.id.timetableFragment)).perform(click());
 		//now click on the session
 		onView(withText("I'll tell you what you can do with Core ML")).perform(click());
 		//set the session as a favourite
 		onView(withId(R.id.session_view_set_favourite_button)).perform(click());
 
 		//click on the favourites tab
-		onView(withIndex(withText(R.string.favourites_tab), 0)).perform(click());
+		onView(withId(R.id.favouritesFragment)).perform(click());
 		onView(withIndex(withId(R.id.session_title_text_view), 0)).check(checkSessionTitleTextView("Using ARKit " +
 						"with SpriteKit"));
 		onView(withIndex(withId(R.id.session_title_text_view), 1)).check(checkSessionTitleTextView("Welcome / " +
