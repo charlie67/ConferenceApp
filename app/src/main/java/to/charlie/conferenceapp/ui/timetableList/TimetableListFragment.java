@@ -82,6 +82,7 @@ public class TimetableListFragment extends Fragment
 		if (sessionsRecyclerAdapter == null)
 		{
 			sessionsRecyclerAdapter = new TimetableRecyclerWithListAdapter();
+
 			sessionListViewModel.getSessionList().observe(this,
 							sessions ->
 							{
@@ -89,6 +90,7 @@ public class TimetableListFragment extends Fragment
 								//if there are sessions then remove the no sessions to show text
 								checkSessionSize(view, sessions.size());
 							});
+
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}
 
