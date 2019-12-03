@@ -193,8 +193,7 @@ public class TimetableItemFragment extends Fragment implements OnMapReadyCallbac
 
 	private void setSpeakerInfo(Speaker speaker)
 	{
-		String nameHeaderString =
-						getResources().getString(R.string.speaker_name_first_part) + " " + speaker.getName();
+		String nameHeaderString = speaker.getName() + " @" + speaker.getTwitter();
 		speakerName.setText(nameHeaderString);
 		speakerBiography.setText(speaker.getBiography());
 

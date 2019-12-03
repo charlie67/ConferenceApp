@@ -45,7 +45,7 @@ public class SessionDisplaysCorrectInformation
 			TextView sessionTime = view.findViewById(R.id.session_view_date_time);
 			TextView sessionPlace = view.findViewById(R.id.session_view_location_name);
 
-			assertEquals(speakerName.getText(), "Speaker: Janie Clayton");
+			assertEquals(speakerName.getText(), "Janie Clayton @redqueencoder");
 			assertEquals(speakerName.getVisibility(), View.VISIBLE);
 
 			assertEquals(sessionTitle.getText(), "Using ARKit with SpriteKit");

@@ -113,6 +113,7 @@
             android:textSize="20sp"
 
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/session_view_session_description" />
 
         <ImageView
