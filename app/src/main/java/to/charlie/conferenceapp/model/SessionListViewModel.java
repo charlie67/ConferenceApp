@@ -2,7 +2,6 @@ package to.charlie.conferenceapp.model;
 
 import android.app.Application;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -54,7 +53,6 @@ public class SessionListViewModel extends AndroidViewModel
 		}
 		else if (!TextUtils.isEmpty(searchCriteria))
 		{
-			Log.i("TEST", "new session list search for");
 			sessionList = repository.searchForSessionWithTitle(searchCriteria);
 		}
 		else if (emptySearch)

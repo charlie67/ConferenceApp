@@ -1,20 +1,25 @@
 package to.charlie.conferenceapp.ui.search;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import to.charlie.conferenceapp.R;
+import to.charlie.conferenceapp.model.Session;
 import to.charlie.conferenceapp.model.SessionListViewModel;
 import to.charlie.conferenceapp.ui.timetableList.TimetableRecyclerWithListAdapter;
+
+import static to.charlie.conferenceapp.ui.util.CheckSessionSize.checkSessionSize;
 
 public class SearchFragment extends Fragment
 {
@@ -42,7 +47,7 @@ public class SearchFragment extends Fragment
 		if (sessionsRecyclerAdapter == null)
 		{
 			sessionsRecyclerAdapter = new TimetableRecyclerWithListAdapter();
-			sessionListViewModel.getSessionList().observe(this, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
+			sessionListViewModel.getSessionList().observe(this, sessionListObserver(view));
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
 		}
 
@@ -59,7 +64,6 @@ public class SearchFragment extends Fragment
 			@Override
 			public boolean onQueryTextChange(String newText)
 			{
-				Log.i("SEARCH", "search query is " + newText);
 				//same as above if then have an empty search
 				if ("".equals(newText))
 				{
@@ -69,7 +73,7 @@ public class SearchFragment extends Fragment
 				{
 					sessionListViewModel.setSearchCriteria(false, null, newText, false);
 				}
-				sessionListViewModel.getSessionList().observe(observerOwner, sessions -> sessionsRecyclerAdapter.changeDataSet(sessions));
+				sessionListViewModel.getSessionList().observe(observerOwner, sessionListObserver(view));
 				return false;
 			}
 		});
@@ -79,5 +83,14 @@ public class SearchFragment extends Fragment
 		listSessions.setAdapter(sessionsRecyclerAdapter);
 
 		return view;
+	}
+
+	private Observer<List<Session>> sessionListObserver(View view)
+	{
+		return sessions ->
+		{
+			sessionsRecyclerAdapter.changeDataSet(sessions);
+			checkSessionSize(view, sessions.size(), R.id.search_no_sessions_text);
+		};
 	}
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import to.charlie.conferenceapp.R;
 import to.charlie.conferenceapp.model.SessionListViewModel;
+
+import static to.charlie.conferenceapp.ui.util.CheckSessionSize.checkSessionSize;
 
 /**
  * Timetable list fragment. This fragment is navigated to from one of the main, timetable,
@@ -88,7 +89,7 @@ public class TimetableListFragment extends Fragment
 							{
 								sessionsRecyclerAdapter.changeDataSet(sessions);
 								//if there are sessions then remove the no sessions to show text
-								checkSessionSize(view, sessions.size());
+								checkSessionSize(view, sessions.size(), R.id.timetable_no_sessions_text);
 							});
 
 			sessionListViewModel.setAdapter(sessionsRecyclerAdapter);
@@ -96,22 +97,12 @@ public class TimetableListFragment extends Fragment
 
 		//if there are sessions then remove the no sessions to show text
 		//this is needed here as well because this n
-		checkSessionSize(view, sessionsRecyclerAdapter.getItemCount());
+		checkSessionSize(view, sessionsRecyclerAdapter.getItemCount(), R.id.timetable_no_sessions_text);
 
 		RecyclerView listSessions = view.findViewById(R.id.session_list);
 		listSessions.setLayoutManager(new LinearLayoutManager(getContext()));
 		listSessions.setAdapter(sessionsRecyclerAdapter);
 
 		return view;
-	}
-
-	private void checkSessionSize(View view, int size)
-	{
-		//check if the no sessions to show text should be removed.
-		if (size > 0)
-		{
-			TextView noSessionsText = view.findViewById(R.id.timetable_no_sessions_text);
-			noSessionsText.setVisibility(View.GONE);
-		}
 	}
 }

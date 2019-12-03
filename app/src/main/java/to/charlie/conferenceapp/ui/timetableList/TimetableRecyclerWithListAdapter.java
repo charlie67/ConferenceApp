@@ -1,7 +1,6 @@
 package to.charlie.conferenceapp.ui.timetableList;
 
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +91,6 @@ public class TimetableRecyclerWithListAdapter extends RecyclerView.Adapter<Timet
 	 */
 	public void changeDataSet(List<Session> dataSet)
 	{
-		Log.i("TEST", "dataset changed");
 		this.dataSet = dataSet;
 		notifyDataSetChanged();
 	}
