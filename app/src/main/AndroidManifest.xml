@@ -12,7 +12,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBtQaESnw7W053L6noxoTrm06YguMSuB00" />
+            android:value="" />
 
         <activity android:name=".ui.ConferenceAppMainActivity">
             <intent-filter>
